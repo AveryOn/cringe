@@ -1,17 +1,36 @@
+<!-- Containter for watching and creation a chapters -->
 <template>
     <div class="creation-container">
         <div class="creation-container__show-panel">
-            <div class="show-panel__wrapped">
+            <!-- Is no open chapter  -->
+            <h1 
+                class="creation-container__no-open-chapters" 
+                >Choose or create chapter</h1>
+            <!-- Panel with openning chapter -->
+            <div 
+                class="show-panel__wrapped" 
+                >
             </div>
         </div>
-        <div class="creation-container__input-panel">
-            <textarea class="input-panel__text" id="input-text" cols="30" rows="10"></textarea>
-        </div>
+        <!-- Container for creation a chapter -->
+        <form class="creation-container__input-panel" @submit.prevent>
+            <inputText v-model="value"></inputText>
+            <div class="input-panel__buttons">
+                <button-comp class="input-panel__btn">Send</button-comp>
+                <button-comp class="input-panel__btn">{{ '>_' }}</button-comp>
+            </div>
+        </form>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import inputText from './inputText.vue';
+import useMainStore from '../store';
+const store = useMainStore();
 
+
+const value = ref('');
 </script>
 
 <style scoped>
@@ -31,6 +50,13 @@
     z-index: 10;
     box-shadow: var(--shadow);
     border-radius: var(--border-radius);
+}
+
+.creation-container__no-open-chapters {
+    background-color: var(--bg-color-reverse);
+    color: var(--color-reverse);
+    padding: 0px 25px;
+    user-select: none;
 }
 
 .creation-container__show-panel {
@@ -61,6 +87,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-radius: var(--border-radius);
     opacity: 0.8;
     width: 95%;
@@ -74,27 +101,20 @@
     transition: box-shadow 1s ease;
     box-shadow: var(--shadow);
 }
-.input-panel__text {
+
+
+.input-panel__buttons {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 98%;
-    width: 75%;
+    width: 12%;
     padding: 10px 15px;
-    margin: 0 0 0 0;
-    border: none;
-    border-right: 2px solid rgba(0, 0, 0, 1.103);
-    font-size: 16px;
-    background-color: var(--bg-color-default);
-    color: var(--color);
-    resize: none;
-    transition: border-color .5s ease;
+    /* border: 1px solid black; */
 }
 
-.input-panel__text:focus {
-    transition: border-color .7s ease;
-    border-color: #fa9c30;
-    outline: none;
-}
-
-.input-panel__text::placeholder {
-    color: #888;
+.input-panel__btn + .input-panel__btn {
+    margin-left: 10px;
 }
 </style>

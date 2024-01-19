@@ -19,6 +19,7 @@
     background-color: var(--bg-color-default);
     border-bottom: 2px solid black;
     padding: 5px 15px;
+    user-select: none;
 }
 .navbar__title {
     font-size: 2em;
