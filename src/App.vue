@@ -19,9 +19,11 @@ import navbarComp from "./components/navbarComp.vue";
 :root {
   /* UI-THINGS */
   --blur: blur(12px);
+  --blur-modal: blur(4px);
   --shadow: 5px 10px 20px rgba(0, 0, 0, 0.3);
   --border: 1px solid rgba(0, 0, 0, 0.3);
   --border-radius: 0.5em;
+  --opacity-default: 0.7;
   /* COLOR */
   --color-default: white;
   --color-input: black;

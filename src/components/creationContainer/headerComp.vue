@@ -1,10 +1,9 @@
 <!-- Heading for CreationContainer -->
 <template>
-  <div class="header">
+  <div class="header" v-show="store.openChapter.isOpen">
     <h1>{{ store.openChapter.title }}</h1>
     <button-exit-comp
       class="header__exit-btn"
-      v-show="store.openChapter.isOpen"
       @click="store.toCloseChapter"
     ></button-exit-comp>
   </div>
