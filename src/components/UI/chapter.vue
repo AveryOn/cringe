@@ -7,7 +7,6 @@
 <script setup>
 import useMainStore from "../../store";
 const store = useMainStore();
-const example = 123;
 defineProps({
     title: {
         type: String,
