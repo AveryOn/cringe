@@ -1,11 +1,11 @@
 <template>
     <li class="chapter__containter" @click="() => store.toOpenChapter(uuid, title)">
-        <slot></slot> {{'<=> ' + uuid}}
+        <slot></slot> {{ "<=> " + uuid }}
     </li>
 </template>
 
 <script setup>
-import useMainStore from '../../store';
+import useMainStore from "../../store";
 const store = useMainStore();
 defineProps({
     title: {
@@ -17,8 +17,6 @@ defineProps({
         required: true,
     },
 });
-
-
 </script>
 
 <style scoped>

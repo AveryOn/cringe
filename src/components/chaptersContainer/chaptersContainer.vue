@@ -1,21 +1,18 @@
 <template>
     <div class="chapters-container">
         <ul class="chapters__list">
-            <chapter 
-            v-for="item in store.chapters"
-            :uuid="item.id"
-            :title="item.title"
-            >
+            <chapter v-for="item in store.chapters" :uuid="item.id" :title="item.title">
                 {{ item.title }}
             </chapter>
         </ul>
+        <optionsMenu></optionsMenu>
     </div>
 </template>
 
 <script setup>
-import useMainStore from '../store';
+import useMainStore from "../../store";
+import optionsMenu from "./optionsMenu.vue";
 const store = useMainStore();
-
 </script>
 
 <style scoped>
@@ -34,6 +31,7 @@ const store = useMainStore();
     box-shadow: var(--shadow);
     border-radius: var(--border-radius);
     color: var(--color-default);
+    overflow: hidden;
 }
 
 .chapters__list {
