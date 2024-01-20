@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-
+const eexxxxample = 1231;
 </script>
 
 <style scoped>
