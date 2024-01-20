@@ -4,18 +4,28 @@ import generateUUID from '../uitls/randomUUID';
 
 const useMainStore = defineStore('mainStore', () => {
     const chapters = reactive([
-        { id: generateUUID(), name: '$ chapter_1' },
-        { id: generateUUID(), name: '$ chapter_2' },
-        { id: generateUUID(), name: '$ chapter_3' },
-        { id: generateUUID(), name: '$ chapter_4' },
-        { id: generateUUID(), name: '$ chapter_5' },
-        { id: generateUUID(), name: '$ chapter_6' },
+        { id: generateUUID(), title: '$ chapter_1' },
+        { id: generateUUID(), title: '$ chapter_2' },
+        { id: generateUUID(), title: '$ chapter_3' },
+        { id: generateUUID(), title: '$ chapter_4' },
+        { id: generateUUID(), title: '$ chapter_5' },
+        { id: generateUUID(), title: '$ chapter_6' },
     ]);
-    const openChapter = reactive({ isOpen: false, uuid: null });
+    const openChapter = reactive({ 
+        isOpen: false, 
+        uuid: null, 
+        title: null,
+    });
 
-    function toOpenChapter(uuid) {
+    function toOpenChapter(uuid, title) {
         openChapter.isOpen = true
         openChapter.uuid = uuid;
+        openChapter.title = title;
+    }
+    function toCloseChapter() {
+        openChapter.isOpen = false;
+        openChapter.uuid = null;  
+        openChapter.title = null;
     }
 
     async function getChapters() {
@@ -28,7 +38,8 @@ const useMainStore = defineStore('mainStore', () => {
         
         // actions
         toOpenChapter,
-        getChapters
+        toCloseChapter,
+        getChapters,
     }
 });
 

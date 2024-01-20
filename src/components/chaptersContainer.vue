@@ -1,7 +1,13 @@
 <template>
     <div class="chapters-container">
         <ul class="chapters__list">
-            <chapter v-for="item in store.chapters">{{ item.name }}</chapter>
+            <chapter 
+            v-for="item in store.chapters"
+            :uuid="item.id"
+            :title="item.title"
+            >
+                {{ item.title }}
+            </chapter>
         </ul>
     </div>
 </template>
@@ -9,7 +15,6 @@
 <script setup>
 import useMainStore from '../store';
 const store = useMainStore();
-console.log(store.chapters);
 
 </script>
 

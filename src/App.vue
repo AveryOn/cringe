@@ -1,8 +1,8 @@
 <template>
-    <div class="app__container">
+    <main class="app__container">
         <navbarComp></navbarComp>
         <router-view></router-view>
-    </div>
+    </main>
 </template>
   
 <script setup>
@@ -17,17 +17,25 @@ import navbarComp from './components/navbarComp.vue';
 }
 
 :root {
+    /* UI-THINGS */
     --blur: blur(12px);
-    --shadow: 5px 10px 20px rgba(0, 0, 0, 0.3);
-    --bg-color-op: rgba(0, 0, 0, 0.333);
-    --border: 1px solid rgba(0, 0, 0, 0.3);
+    --shadow: 5px 10px 20px rgba(0, 0, 0, .3);
+    --border: 1px solid rgba(0, 0, 0, .3);
     --border-radius: 0.5em;
-    --bg-color-default: white;
+    /* COLOR */
     --color-default: white;
-    --bg-color-chapter: rgba(0, 0, 0, 0.85);
+    --color-input: black;
     --color-active: #fa9c30;
-    --bg-color-reverse: black;
     --color-reverse: white;
+    /* BACKGROUND-COLOR */
+    --bg-color-op: rgba(0, 0, 0, 0.333);
+    --bg-color-default: white;
+    --bg-color-chapter: rgba(0, 0, 0, 0.85);
+    --bg-color-reverse: black;
+    /* SIZE */
+    --font-size-default: 16px;
+    --font-size-title: 11px;
+    --font-size-exit-btn: 12px;
 }
 
 ::-webkit-scrollbar {

@@ -8,7 +8,7 @@
 
 <script setup>
 import chaptersContainer from '../components/chaptersContainer.vue';
-import creationContainer from '../components/creationContainer.vue';
+import creationContainer from '../components/creationContainer/creationContainer.vue';
 
 </script>
 
@@ -17,6 +17,7 @@ import creationContainer from '../components/creationContainer.vue';
     position: relative;
     height: 90%;
     width: 100%;
+    font-size: var(--font-size-default);
 }
 .main__bg-style {
     position: absolute;
