@@ -1,18 +1,27 @@
 <template>
     <div class="creation-wrapped">
         <!-- Input Title -->
-        <creationBlock class="creation-wrapped__block">
-            <input class="creation-wrapped__input" type="text" placeholder="Enter title">
-        </creationBlock>
+        <creationTitle 
+        class="creation-wrapped__block"
+        v-model:title="title"
+        ></creationTitle>
+
         <!-- Input Subject -->
-        <creationBlock class="creation-wrapped__block"></creationBlock>
+        <creationSubject class="creation-wrapped__block"></creationSubject>
+
         <!-- Input Color -->
-        <creationBlock class="creation-wrapped__block"></creationBlock>
+        <creationColor class="creation-wrapped__block"></creationColor>
+
     </div>
 </template>
 
 <script setup>
-import creationBlock from './creationBlock.vue';
+import creationTitle from './creationTitle.vue';
+import creationColor from './creationColor.vue';
+import creationSubject from './creationSubject.vue';
+import { ref } from 'vue';
+
+const title = ref('');
 
 </script>
 
@@ -23,13 +32,7 @@ import creationBlock from './creationBlock.vue';
     padding: 60px 0 30px 0;
     overflow: auto;
 }
-
 .creation-wrapped__block+.creation-wrapped__block {
     margin-top: 20px;
-}
-.creation-wrapped__input {
-    width: 90%;
-    height: 30px;
-    padding: 15px;
 }
 </style>
