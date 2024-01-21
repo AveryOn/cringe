@@ -10,7 +10,7 @@
 <script setup>
 import chaptersContainer from "../components/chaptersContainer/chaptersContainer.vue";
 import creationContainer from "../components/creationContainer/creationContainer.vue";
-import creationManager from "../components/creationManager.vue";
+import creationManager from "../components/creationManager/creationManager.vue";
 </script>
 
 <style scoped>

@@ -17,7 +17,7 @@ const useMainStore = defineStore("mainStore", () => {
         uuid: null,
         title: null,
     });
-    const isShowCreationManager = ref(false);
+    const isShowCreationManager = ref(true);
 
     // ACTIONS    ===============================================================================>>>>
     function toOpenChapter(uuid, title) {

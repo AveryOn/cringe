@@ -26,7 +26,7 @@
 <script setup>
 import useMainStore from "../../store";
 const store = useMainStore();
-import inputText from "../inputText.vue";
+import inputText from "./inputText.vue";
 import { ref } from "vue";
 const value = ref("");
 </script>

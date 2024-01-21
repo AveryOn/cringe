@@ -1,18 +1,19 @@
-<!-- Heading for CreationContainer -->
 <template>
-    <div class="header" v-show="store.openChapter.isOpen">
-        <h1>{{ store.openChapter.title }}</h1>
-        <button-exit-comp class="header__exit-btn" @click="store.toCloseChapter"></button-exit-comp>
+    <div class="creation-manager__header">
+        <h1>Create a new chapter</h1>
+        <button-exit-comp class="header__exit-btn" @click="store.showCreationManager(false)">
+            X
+        </button-exit-comp>
     </div>
 </template>
 
 <script setup>
-import useMainStore from "../../store";
+import useMainStore from '../../store'
 const store = useMainStore();
 </script>
 
 <style scoped>
-.header {
+.creation-manager__header {
     position: absolute;
     top: 0;
     right: 0;
@@ -25,6 +26,7 @@ const store = useMainStore();
     background-color: var(--bg-color-reverse);
     color: var(--color-reverse);
     user-select: none;
+    z-index: 1010;
 }
 
 .header__exit-btn {

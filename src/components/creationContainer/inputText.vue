@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import useMainStore from "../store";
+import useMainStore from "../../store";
 const store = useMainStore();
 const model = defineModel();
 function update(e) {
