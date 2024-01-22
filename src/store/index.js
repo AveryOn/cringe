@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, reactive } from "vue";
 import generateUUID from "../uitls/randomUUID";
+import randomID from "../uitls/randomID";
 
 const useMainStore = defineStore("mainStore", () => {
     // STATE    ===============================================================================>>>>
@@ -12,6 +13,11 @@ const useMainStore = defineStore("mainStore", () => {
         { id: generateUUID(), title: "$ chapter_5" },
         { id: generateUUID(), title: "$ chapter_6" },
     ]);
+    const subjects = reactive([
+        { id: randomID(), title: 'Math' },
+        { id: randomID(), title: 'Frontend' },
+        { id: randomID(), title: 'Backend' },
+    ])
     const openChapter = reactive({
         isOpen: false,
         uuid: null,
@@ -31,12 +37,18 @@ const useMainStore = defineStore("mainStore", () => {
         openChapter.title = null;
     }
 
+    // Show a Creation Manager
     function showCreationManager(value) {
-        if(value === true) {
+        if (value === true) {
             isShowCreationManager.value = value;
         } else {
             isShowCreationManager.value = value;
         }
+    }
+
+    // Create new subject
+    function createSubject(title) {
+        subjects.push({ id: randomID(), title: title });
     }
 
     async function getChapters() {
@@ -46,12 +58,14 @@ const useMainStore = defineStore("mainStore", () => {
         // state
         openChapter,
         chapters,
+        subjects,
         isShowCreationManager,
 
         // actions
         toOpenChapter,
         toCloseChapter,
         showCreationManager,
+        createSubject,
         getChapters,
     };
 });

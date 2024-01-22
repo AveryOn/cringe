@@ -1,8 +1,13 @@
 <template>
-    <input class="input" v-model="value">
+    <input 
+    class="input" 
+    v-model="value"
+    @input="(e) => $emit('inputLetter', e.target.value)"
+    >
 </template>
 
 <script setup>
+defineEmits(['inputLetter']);
 const value = defineModel('value');
 </script>
 

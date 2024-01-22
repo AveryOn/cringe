@@ -30,11 +30,14 @@ import navbarComp from "./components/navbarComp.vue";
     --color-text: black;
     --color-active: #fa9c30;
     --color-reverse: white;
+    --color-alias: rgb(254, 92, 254);
+    --color-error: rgb(230, 60, 60);
     /* BACKGROUND-COLOR */
     --bg-color-op: rgba(0, 0, 0, 0.333);
     --bg-color-default: white;
     --bg-color-chapter: rgba(0, 0, 0, 0.85);
     --bg-color-reverse: black;
+    --bg-color-subject: rgb(103, 103, 103);
     /* SIZE */
     --font-size-default: 16px;
     --font-size-title: 11px;
