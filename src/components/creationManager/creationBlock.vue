@@ -36,6 +36,7 @@
     flex-direction: column;
     width: 100%;
     height: max-content;
+    /* border: 1px solid black; */
     margin-bottom: 25px;
 }
 </style>

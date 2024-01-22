@@ -8,12 +8,11 @@
         <!-- body -->
         <template v-slot:body>
             <div class="creation-title__body">
-                <input 
-                class="creation-wrapped__input" 
-                type="text" 
-                placeholder="Enter title"
-                v-model="title"
-                >
+                <input-comp 
+                :type="'text'" 
+                :placeholder="'Enter title'" 
+                v-model:value="title"
+                ></input-comp>
                 <button class="creation-title__confirm">
                     <svg class="icon-send" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                         <path
@@ -27,7 +26,9 @@
 
 <script setup>
 import creationBlock from './creationBlock.vue';
-const title = defineModel('title');
+import { ref } from 'vue';
+
+const title = ref('');
 </script>
 
 <style scoped>
@@ -40,26 +41,6 @@ const title = defineModel('title');
     justify-content: center;
 }
 
-.creation-wrapped__input {
-    width: 80%;
-    height: 30px;
-    padding: 25px 15px 10px 15px;
-    margin-right: 15px;
-    border: none;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-    transition: border-color 1s ease;
-    font-weight: bolder;
-    outline: rgba(0,0,0,0);
-    font-family: monospace;
-    font-size: var(--font-size-default);
-}
-.creation-wrapped__input::placeholder{
-    font-weight: normal;
-}
-.creation-wrapped__input:focus {
-    border-color: var(--color-active);
-    transition: border-color 1s ease;
-}
 .creation-title__confirm {
     padding: 1px 1px;
     display: flex;
