@@ -19,6 +19,7 @@
     font-weight: bolder;
     cursor: pointer;
     padding: 0 5px;
+    user-select: none;
 }
 .subject:hover {
     background-color: rgb(156, 156, 156);

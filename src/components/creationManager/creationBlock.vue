@@ -26,7 +26,7 @@
     background-color: var(--bg-color-reverse);
     color: var(--color-reverse);
     padding: 0 15px;
-    margin: 10px 0 15px 0;
+    margin: 20px 0 25px 0;
     user-select: none;
     font-size: var(--font-size-creation-title);
 }

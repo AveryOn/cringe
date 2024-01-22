@@ -35,6 +35,7 @@ import navbarComp from "./components/navbarComp.vue";
     /* BACKGROUND-COLOR */
     --bg-color-op: rgba(0, 0, 0, 0.333);
     --bg-color-default: white;
+    --bg-color-creation-manager: rgba(255, 255, 255, var(--opacity-default));
     --bg-color-chapter: rgba(0, 0, 0, 0.85);
     --bg-color-reverse: black;
     --bg-color-subject: rgb(103, 103, 103);

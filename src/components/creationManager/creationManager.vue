@@ -9,6 +9,7 @@
             <headerComp></headerComp>
             <!-- Wrapped -->
             <creationWrapped></creationWrapped>
+            
         </div>
     </div>
 </template>
@@ -39,11 +40,11 @@ const store = useMainStore();
 .creation-manager__container {
     position: relative;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 50%;
     height: 60%;
-    background-color: var(--bg-color-default);
-    opacity: var(--opacity-default);
+    background-color: var(--bg-color-creation-manager);
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow);
