@@ -16,7 +16,7 @@
                     @input="(e) => recordColor(e.target.value)"
                     >
                     <p class="color-create__watch">{{ currentColor }}</p>
-                    <button class="color-create__execute" @click="createNewSubject">
+                    <button class="color-create__execute" @click="$emit('confirmColor', currentColor)">
                         <svg class="icon-send" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                             <path
                                 d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" />
@@ -32,12 +32,14 @@
 import creationBlock from './creationBlock.vue';
 import { ref } from 'vue';
 
+defineEmits(['confirmColor'])
+
 const currentColor = ref('#000000');
 
 function recordColor(color) {
     currentColor.value = color;
-    console.log(color);
 }
+
 
 </script>
 

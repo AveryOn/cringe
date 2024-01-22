@@ -79,6 +79,9 @@ import creationBlock from './creationBlock.vue';
 import useMainStore from '../../store/';
 import { ref } from 'vue';
 
+
+const emit = defineEmits(['confirmSubject']);
+
 const store = useMainStore();
 const title = ref('');
 const acceptableLetters = ref(50);
@@ -127,6 +130,7 @@ function confirmChooseSubject() {
     if(selectedSubject.value === 'null') {
         return;
     }
+    emit('confirmSubject', selectedSubject.value);
 }
 
 // Обработчик закрытия и открытия блока для создания subjuects

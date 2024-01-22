@@ -43,7 +43,7 @@ const store = useMainStore();
     align-items: center;
     flex-direction: column;
     width: 50%;
-    height: 60%;
+    height: 70%;
     background-color: var(--bg-color-creation-manager);
     border-radius: var(--border-radius);
     overflow: hidden;

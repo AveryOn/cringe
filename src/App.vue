@@ -38,7 +38,7 @@ import navbarComp from "./components/navbarComp.vue";
     --bg-color-creation-manager: rgba(255, 255, 255, var(--opacity-default));
     --bg-color-chapter: rgba(0, 0, 0, 0.85);
     --bg-color-reverse: black;
-    --bg-color-subject: rgb(103, 103, 103);
+    --bg-color-subject: rgb(0, 89, 109);
     /* SIZE */
     --font-size-default: 16px;
     --font-size-title: 11px;

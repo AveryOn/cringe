@@ -3,14 +3,20 @@
         <!-- Input Title -->
         <creationTitle 
         class="creation-wrapped__block"
-        v-model:title="title"
+        @confirm-title="confirmTitle"
         ></creationTitle>
 
         <!-- Input Subject -->
-        <creationSubject class="creation-wrapped__block"></creationSubject>
+        <creationSubject 
+        class="creation-wrapped__block"
+        @confirm-subject="confirmSubject"
+        ></creationSubject>
 
         <!-- Input Color -->
-        <creationColor class="creation-wrapped__block"></creationColor>
+        <creationColor 
+        class="creation-wrapped__block"
+        @confirm-color="confirmColor"
+        ></creationColor>
         <button-comp class="creation-wrapped__confirm">Confirm</button-comp>
     </div>
 </template>
@@ -22,6 +28,21 @@ import creationSubject from './creationSubject.vue';
 import { ref } from 'vue';
 
 const title = ref('');
+const subject = ref('');
+const color = ref('');
+
+// Обработка подтверждения Title
+function confirmTitle(value) {
+    title.value = value;
+}
+// Обработка подтверждения Subject
+function confirmSubject(value) {
+    subject.value = value;
+}
+// Обработка подтверждения Color
+function confirmColor(value) {
+    color.value = value;
+}
 
 </script>
 

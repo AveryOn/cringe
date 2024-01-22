@@ -20,6 +20,7 @@
     border: var(--border);
     margin: auto;
     border-radius: var(--border-radius);
+    background-color: var(--bg-color-default);
     box-shadow: var(--shadow);
 }
 .creation-block__title {
