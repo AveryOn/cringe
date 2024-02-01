@@ -17,7 +17,10 @@
         class="creation-wrapped__block"
         @confirm-color="confirmColor"
         ></creationColor>
-        <button-comp class="creation-wrapped__confirm">Confirm</button-comp>
+        <button-comp 
+        class="creation-wrapped__confirm"
+        @click="confirmData"
+        >Confirm</button-comp>
     </div>
 </template>
 
@@ -25,7 +28,11 @@
 import creationTitle from './creationTitle.vue';
 import creationColor from './creationColor.vue';
 import creationSubject from './creationSubject.vue';
-import { ref } from 'vue';
+import useMainStore from '../../store/index.js';
+import { ref, defineEmits } from 'vue';
+
+const store = useMainStore();
+const emit = defineEmits(['confirm-data']);
 
 const title = ref('');
 const subject = ref('');
@@ -44,6 +51,24 @@ function confirmColor(value) {
     color.value = value;
 }
 
+// Подтверждение всех данных
+function confirmData() {
+    // Проверяем существуют ли все обязательные данные
+    if(!!title.value && !!subject.value && !!color.value) {
+        // Отправляем данные на сервер
+        emit('confirm-data', {
+            title: title.value,
+            subject: subject.value,
+            color: color.value,
+        });
+    } else {
+        // Отправляем сообщение в стек ошибок
+        return store.addError({
+            message: 'Please fill in all fields'
+        }, 5);
+    }
+}
+
 </script>
 
 <style scoped>
@@ -56,7 +81,7 @@ function confirmColor(value) {
 .creation-wrapped__block {
     margin-bottom: 20px;
 }
-.creation-wrapped__block+.creation-wrapped__block {
+.creation-wrapped__block + .creation-wrapped__block {
     margin-top: 20px;
 }
 .creation-wrapped__confirm {
