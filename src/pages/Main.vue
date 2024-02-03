@@ -15,9 +15,9 @@
 </template>
 
 <script setup>
-import chaptersContainer from "../components/chaptersContainer/chaptersContainer.vue";
-import creationContainer from "../components/creationContainer/creationContainer.vue";
-import creationManager from "../components/creationManager/creationManager.vue";
+import chaptersContainer from "../components/chaptersContainerDir/chaptersContainer.vue";
+import creationContainer from "../components/creationContainerDir/creationContainer.vue";
+import creationManager from "../components/creationManagerDir/creationManager.vue";
 import useMainStore from "../store";
 const store = useMainStore();
 </script>
@@ -42,7 +42,6 @@ const store = useMainStore();
     justify-content: flex-end;
     align-items: center;
     z-index: 99999;
-    border: 1px solid black;
 }
 .main__bg-style {
     position: absolute;

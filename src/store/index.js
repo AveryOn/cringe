@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { ref, reactive, watch, computed } from "vue";
 import generateUUID from "../uitls/randomUUID";
 import randomID from "../uitls/randomID";
-import { appendError } from '../algorithms/errorStack';
 
 const useMainStore = defineStore("mainStore", () => {
     // STATE    ===============================================================================>>>>
@@ -24,12 +23,12 @@ const useMainStore = defineStore("mainStore", () => {
 
     // Стек ошибок и исключений (Для отрисовки соответствующих уведомлений)
     const errorStack = ref([
-        {id: randomID(), message: "Error asdasdasdasdsdd1 2.sdasdasdsdd1 3.adasd 4.asaasf"},
-        {id: randomID(), message: "Error 2"},
-        {id: randomID(), message: "Error 3"},
-        {id: randomID(), message: "Error 4"},
-        {id: randomID(), message: "Error 5"},
-        {id: randomID(), message: "Error 6"},
+        // {id: randomID(), message: "Error asdasdasdasdsdd1 2.sdasdasdsdd1 3.adasd 4.asaasf"},
+        // {id: randomID(), message: "Error 2"},
+        // {id: randomID(), message: "Error 3"},
+        // {id: randomID(), message: "Error 4"},
+        // {id: randomID(), message: "Error 5"},
+        // {id: randomID(), message: "Error 6"},
     ]);
 
     const openChapter = reactive({
@@ -64,14 +63,19 @@ const useMainStore = defineStore("mainStore", () => {
     function createSubject(title) {
         subjects.push({ id: randomID(), title: title });
     }
-
     // Функция добавления и удаления ошибки (Стек Ошибок)
-    function addError(error, lifetime) {
-        appendError(errorStack.value, error, lifetime)
-            .then((newStack) => {
-                errorStack.value = newStack;
-                console.log(errorStack.value);
-            });
+    function addError(error, secondExpires) {
+        try {
+            error.id = randomID();
+            errorStack.value.push(error);
+            setTimeout(() => {
+                errorStack.value = errorStack.value.filter((err) => {
+                    return error.id !== err.id;
+                });
+            }, secondExpires * 1000);
+        } catch (err) {
+            throw Error('store/index:addError', err)
+        }
     }
 
     // Функция получения списка разделов
