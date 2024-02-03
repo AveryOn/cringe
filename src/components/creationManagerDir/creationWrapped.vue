@@ -6,6 +6,7 @@
         @confirm-title="confirmTitle"
         :is-confirm="isConfirmTitle"
         :is-except="isExceptTitle"
+        v-model:title="title"
         ></creationTitle>
 
         <!-- Input Subject -->
@@ -91,6 +92,7 @@ function confirmColor(value) {
 // Подтверждение всех данных
 function confirmData() {
     // Проверяем существуют ли все обязательные данные
+    console.log(title.value);
     if(!!title.value && !!subject.value && !!color.value) {
         // Отправляем данные на сервер
         emit('confirm-data', {

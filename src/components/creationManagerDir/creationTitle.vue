@@ -33,7 +33,10 @@
 
 <script setup>
 import creationBlock from './creationBlock.vue';
-import { ref, defineProps, defineEmits } from 'vue';
+import { ref, defineProps, defineEmits, defineModel } from 'vue';
+
+const title = defineModel('title');
+
 defineEmits(['confirmTitle']);
 const props = defineProps({
     isConfirm: {
@@ -47,7 +50,6 @@ const props = defineProps({
         default: false,
     },
 });
-const title = ref('');
 </script>
 
 <style scoped>
