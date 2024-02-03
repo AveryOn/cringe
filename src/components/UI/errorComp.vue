@@ -1,7 +1,11 @@
 <template>
-    <div class="error__container">
-        <h2 class="error__title">message: {{ props.error.message }}</h2>
-        <p class="error__id">id: {{ props.error.id }}</p>
+    <div class="error">
+        <h2 class="error__title">
+            message: 
+            <strong>
+                {{ props.error.message }}
+            </strong>
+        </h2>
     </div>
 </template>
 
@@ -18,13 +22,33 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.error__container {
-    padding: 2px 25px;
+::-webkit-scrollbar {
+    width: 5px;
+    /* Ширина скроллбара */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #0c0b0b;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    /* Цвет ползунка скроллбара */
+}
+.error {
+    position: relative;
+    width: 100%;
+    height: max-content;
+    max-height: 20%;
+    padding: 5px 25px;
+    overflow: auto;
     margin: 2px 5px;
-    background-color: rgba(222, 71, 71, 0.7);
+    background-color: var(--bg-color-error);
     color: black;
 }
+
 .error__title {
     font-size: 20px;
+    text-align: start;
+    line-height: 1.05;
+    font-weight: normal;
 }
 </style>

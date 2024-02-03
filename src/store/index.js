@@ -24,7 +24,7 @@ const useMainStore = defineStore("mainStore", () => {
 
     // Стек ошибок и исключений (Для отрисовки соответствующих уведомлений)
     const errorStack = ref([
-        {id: randomID(), message: "Error asdasdasdasdsdd1asdasdasdasdsdd1"},
+        {id: randomID(), message: "Error asdasdasdasdsdd1 2.sdasdasdsdd1 3.adasd 4.asaasf"},
         {id: randomID(), message: "Error 2"},
         {id: randomID(), message: "Error 3"},
         {id: randomID(), message: "Error 4"},
@@ -74,7 +74,7 @@ const useMainStore = defineStore("mainStore", () => {
             });
     }
 
-
+    // Функция получения списка разделов
     async function getChapters() {
         console.log(getChapters.name);
     }

@@ -32,14 +32,15 @@ const store = useMainStore();
 }
 .error-stack {
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: 10px;
+    bottom: 10px;
     width: max-content;
     max-width: 20%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    align-items: center;
     z-index: 99999;
     border: 1px solid black;
 }

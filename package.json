@@ -10,8 +10,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\"",
-    "format": "prettier --write \"src/**/*.@(js|jsx|ts|tsx|vue)\""
+    "lint": "eslint .",
+    "format": "prettier --write"
   },
   "keywords": [],
   "author": {
