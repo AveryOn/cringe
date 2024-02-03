@@ -4,18 +4,24 @@
         <creationTitle 
         class="creation-wrapped__block"
         @confirm-title="confirmTitle"
+        :is-confirm="isConfirmTitle"
+        :is-except="isExceptTitle"
         ></creationTitle>
 
         <!-- Input Subject -->
         <creationSubject 
         class="creation-wrapped__block"
         @confirm-subject="confirmSubject"
+        :is-confirm="isConfirmSubject"
+        :is-except="isExceptSubject"
         ></creationSubject>
 
         <!-- Input Color -->
         <creationColor 
         class="creation-wrapped__block"
         @confirm-color="confirmColor"
+        :is-confirm="isConfirmColor"
+        :is-except="isExceptColor"
         ></creationColor>
         <button-comp 
         class="creation-wrapped__confirm"
@@ -34,21 +40,62 @@ import { ref, defineEmits } from 'vue';
 const store = useMainStore();
 const emit = defineEmits(['confirm-data']);
 
+// Пропсы для отображения сообщения об успехе сохранения
+const isConfirmTitle = ref(false);
+const isConfirmSubject = ref(false);
+const isConfirmColor = ref(false);
+
+// Пропсы для отображения сообщения об исключении/сбое сохранения
+const isExceptTitle = ref(false);
+const isExceptSubject = ref(false);
+const isExceptColor = ref(false);
+
 const title = ref('');
 const subject = ref('');
 const color = ref('');
 
+// Время которое отображается сообщение об ошибке
+const exceptExpires = 1500;
+
 // Обработка подтверждения Title
 function confirmTitle(value) {
-    title.value = value;
+    if(!!value.length) {
+        title.value = value;
+        isConfirmTitle.value = true;
+    } else { 
+        // Отключение сообщение об ошибке
+        isExceptTitle.value = true;
+        setTimeout(() => {
+            isExceptTitle.value = false;
+        }, exceptExpires);
+    }
 }
 // Обработка подтверждения Subject
 function confirmSubject(value) {
-    subject.value = value;
+    console.log(value);
+    if(!!value.length && value !== 'null') { 
+        subject.value = value;
+        isConfirmSubject.value = true;
+    } else { 
+        // Отключение сообщение об ошибке
+        isExceptSubject.value = true;
+        setTimeout(() => {
+            isExceptSubject.value = false;
+        }, exceptExpires);
+    }
 }
 // Обработка подтверждения Color
 function confirmColor(value) {
-    color.value = value;
+    if(!!value.length) {
+        color.value = value;
+        isConfirmColor.value = true;
+    }  else { 
+        // Отключение сообщение об ошибке
+        isExceptColor.value = true;
+        setTimeout(() => {
+            isExceptColor.value = false;
+        }, exceptExpires);
+    }
 }
 
 // Подтверждение всех данных

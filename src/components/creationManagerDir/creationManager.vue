@@ -8,7 +8,7 @@
             <!-- Header -->
             <headerComp></headerComp>
             <!-- Wrapped -->
-            <creationWrapped></creationWrapped>
+            <creationWrapped @confirm-data="console.log('confirm-data')"></creationWrapped>
             
         </div>
     </div>

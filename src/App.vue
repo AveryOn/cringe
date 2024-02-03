@@ -40,6 +40,8 @@ import navbarComp from "./components/navbarComp.vue";
     --bg-color-reverse: black;
     --bg-color-subject: rgb(0, 89, 109);
     --bg-color-error: rgba(222, 71, 71, 0.7);
+    --bg-color-success: rgb(97, 201, 97);
+    --bg-color-except: rgb(225, 68, 68);
     /* SIZE */
     --font-size-default: 16px;
     --font-size-title: 11px;

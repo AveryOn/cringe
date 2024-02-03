@@ -1,6 +1,9 @@
 <!-- SUBJECT -->
 <template>
-    <creationBlock>
+    <creationBlock 
+    :is-confirm="props.isConfirm"
+    :is-except="props.isExcept"
+    >
         <!-- header -->
         <template v-slot:header>
             Choose a subject
@@ -77,8 +80,20 @@
 <script setup>
 import creationBlock from './creationBlock.vue';
 import useMainStore from '../../store/';
-import { ref } from 'vue';
+import { ref, defineProps, defineEmits } from 'vue';
 
+const props = defineProps({
+    isConfirm: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    isExcept: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+});
 
 const emit = defineEmits(['confirmSubject']);
 
@@ -127,9 +142,6 @@ function createNewSubject() {
 
 // Подтверждение установленного предмета subject
 function confirmChooseSubject() {
-    if(selectedSubject.value === 'null') {
-        return;
-    }
     emit('confirmSubject', selectedSubject.value);
 }
 

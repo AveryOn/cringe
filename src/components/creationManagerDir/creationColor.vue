@@ -1,6 +1,9 @@
 <!-- COLOR -->
 <template>
-    <creationBlock>
+    <creationBlock 
+    :is-confirm="isConfirm"
+    :is-except="props.isExcept"
+    >
         <!-- header -->
         <template v-slot:header>
             Select marking color
@@ -30,7 +33,20 @@
 
 <script setup>
 import creationBlock from './creationBlock.vue';
-import { ref } from 'vue';
+import { ref, defineProps, defineEmits } from 'vue';
+
+const props = defineProps({
+    isConfirm: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    isExcept: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+});
 
 defineEmits(['confirmColor'])
 

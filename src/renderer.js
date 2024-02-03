@@ -8,7 +8,7 @@ const app = createApp(App);
 const pinia = createPinia();
 
 components.forEach((component) => {
-  app.component(component.name, component);
+    app.component(component.compName, component);
 });
 
 app.use(pinia).use(router).mount("#app");

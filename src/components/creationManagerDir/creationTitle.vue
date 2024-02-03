@@ -1,6 +1,9 @@
 <!-- TITLE -->
 <template>
-    <creationBlock>
+    <creationBlock 
+    :is-confirm="props.isConfirm"
+    :is-except="props.isExcept"
+    >
         <!-- header -->
         <template v-slot:header>
             Enter the title
@@ -29,8 +32,20 @@
 
 <script setup>
 import creationBlock from './creationBlock.vue';
-import { ref } from 'vue';
+import { ref, defineProps, defineEmits } from 'vue';
 defineEmits(['confirmTitle']);
+const props = defineProps({
+    isConfirm: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    isExcept: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+});
 const title = ref('');
 </script>
 

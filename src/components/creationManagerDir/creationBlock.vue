@@ -1,14 +1,42 @@
 <template>
     <div class="creation-block">
-        <h2 class="creation-block__title"><slot name="header"></slot></h2>
+        <!-- Уведомление об успешном сохранении данных -->
+        <success-note-comp class="creation-block__success-note" :show="props.isConfirm">
+            Confirm!
+        </success-note-comp>
+
+        <!-- Уведомление об ошибке при сохранении данных -->
+        <except-note-comp class="creation-block__except-note" :show="props.isExcept">
+            Required!
+        </except-note-comp>
+        <h2 class="creation-block__title">
+            <slot name="header"></slot>
+        </h2>
         <div class="creation-block__body">
             <slot name="body"></slot>
         </div>
     </div>
 </template>
 
+<script setup>
+import { defineProps } from 'vue';
+const props = defineProps({
+    isConfirm: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    isExcept: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+})
+</script>
+
 <style scoped>
 .creation-block {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,6 +50,17 @@
     border-radius: var(--border-radius);
     background-color: var(--bg-color-default);
     box-shadow: var(--shadow);
+    overflow: hidden;
+}
+.creation-block__success-note {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.creation-block__except-note {
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 .creation-block__title {
     background-color: var(--bg-color-reverse);

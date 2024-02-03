@@ -5,14 +5,18 @@ import optionComp from '../UI/optionComp.vue';
 import inputComp from '../UI/inputComp.vue';
 import subjectComp from '../UI/subjectComp.vue';
 import errorComp from '../UI/errorComp.vue';
+import successNoteComp from '../UI/successNoteComp.vue';
+import exceptNoteComp from '../UI/exceptNoteComp.vue';
 
-chapter.name = "chapter";
-buttonComp.name = "buttonComp";
-buttonExitComp.name = "buttonExitComp";
-optionComp.name = 'optionComp';
-inputComp.name = 'inputComp';
-subjectComp.name = 'subjectComp';
-errorComp.name = 'errorComp';
+chapter.compName = "chapter";
+buttonComp.compName = "buttonComp";
+buttonExitComp.compName = "buttonExitComp";
+optionComp.compName = 'optionComp';
+inputComp.compName = 'inputComp';
+subjectComp.compName = 'subjectComp';
+errorComp.compName = 'errorComp';
+successNoteComp.compName = 'successNoteComp';
+exceptNoteComp.compName = 'exceptNoteComp';
 export default [
     chapter,
     buttonComp,
@@ -21,4 +25,6 @@ export default [
     inputComp,
     subjectComp,
     errorComp,
+    successNoteComp,
+    exceptNoteComp,
 ];
