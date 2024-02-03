@@ -15,6 +15,7 @@
                 :type="'text'" 
                 :placeholder="'Enter title'" 
                 v-model:value="title"
+                @keyup.enter="() => $emit('confirmTitle', title)"
                 ></input-comp>
                 <button 
                 class="creation-title__confirm"

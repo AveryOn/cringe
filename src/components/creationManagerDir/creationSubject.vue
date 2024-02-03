@@ -53,6 +53,7 @@
                         :placeholder="'Enter title'" 
                         v-model:value="title"
                         @input-letter="remainLetters"
+                        @keyup.enter="createNewSubject"
                         ></input-comp>
                         <button 
                         class="subject-create__execute"
@@ -130,7 +131,9 @@ function createNewSubject() {
     const subjectList = document.querySelector('.creation-subject__subject-list');
     store.createSubject(title.value);
     handlerOpenClosed();
+    selectedSubject.value = title.value;
     title.value = '';
+    confirmChooseSubject();
     setTimeout(() => {
         const afterScroll = subjectList.scrollHeight;
         subjectList.scroll({

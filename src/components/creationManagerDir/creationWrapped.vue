@@ -61,40 +61,30 @@ const exceptExpires = 1500;
 function confirmTitle(value) {
     if(!!value.length) {
         title.value = value;
+        isExceptTitle.value = false;
         isConfirmTitle.value = true;
     } else { 
-        // Отключение сообщение об ошибке
         isExceptTitle.value = true;
-        setTimeout(() => {
-            isExceptTitle.value = false;
-        }, exceptExpires);
     }
 }
 // Обработка подтверждения Subject
 function confirmSubject(value) {
-    console.log(value);
     if(!!value.length && value !== 'null') { 
         subject.value = value;
+        isExceptSubject.value = false;
         isConfirmSubject.value = true;
     } else { 
-        // Отключение сообщение об ошибке
         isExceptSubject.value = true;
-        setTimeout(() => {
-            isExceptSubject.value = false;
-        }, exceptExpires);
     }
 }
 // Обработка подтверждения Color
 function confirmColor(value) {
     if(!!value.length) {
         color.value = value;
+        isExceptColor.value = false;
         isConfirmColor.value = true;
     }  else { 
-        // Отключение сообщение об ошибке
         isExceptColor.value = true;
-        setTimeout(() => {
-            isExceptColor.value = false;
-        }, exceptExpires);
     }
 }
 
