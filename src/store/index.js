@@ -3,9 +3,12 @@ import { ref, reactive } from "vue";
 import randomID from "../uitls/randomID";
 
 const useMainStore = defineStore("mainStore", () => {
-    // STATE    ===============================================================================>>>>
+    // ==========================================    STATE    ===============================================================================>>>>
     // Массив созданных разделов тематики 
-    const chapters = reactive([]);
+    const chapters = reactive([
+        {title: 'Example', subject: 'Math', color: '#f038ea'},
+        {title: 'Another Example', subject: 'Frontend', color: '#38a0f0'},
+    ]);
     // Массив доступных предметов (жанров) для создания раздела тематики 
     const subjects = reactive([
         { id: randomID(), title: 'Math' },
@@ -23,7 +26,7 @@ const useMainStore = defineStore("mainStore", () => {
     });
     const isShowCreationManager = ref(false);
 
-    // ACTIONS    ===============================================================================>>>>
+    // ==========================================    ACTIONS    ===============================================================================>>>>
     function toOpenChapter(uuid, title) {
         openChapter.isOpen = true;
         openChapter.uuid = uuid;
@@ -38,6 +41,7 @@ const useMainStore = defineStore("mainStore", () => {
     // Создание раздела
     function createChapter(chapter) {
         try {
+            console.log('store/createChapter', chapter);
             chapter.id = randomID();
             isShowCreationManager.value = false;
             chapters.push(chapter);

@@ -25,6 +25,7 @@ const store = useMainStore();
     background-color: var(--bg-color-reverse);
     color: var(--color-reverse);
     user-select: none;
+    z-index: 100;
 }
 
 .header__exit-btn {
