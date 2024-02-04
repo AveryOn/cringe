@@ -55,9 +55,6 @@ const title = ref('');
 const subject = ref('');
 const color = ref('');
 
-// Время которое отображается сообщение об ошибке
-const exceptExpires = 1500;
-
 // Обработка подтверждения Title
 function confirmTitle(value) {
     if(!!value.length) {
@@ -92,7 +89,6 @@ function confirmColor(value) {
 // Подтверждение всех данных
 function confirmData() {
     // Проверяем существуют ли все обязательные данные
-    console.log(title.value);
     if(!!title.value && !!subject.value && !!color.value) {
         // Отправляем данные на сервер
         emit('confirm-data', {

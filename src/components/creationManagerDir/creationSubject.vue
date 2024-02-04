@@ -189,6 +189,7 @@ function handlerOpenClosed() {
 .subject-example {
     margin-left: 10px;
     font-weight: bolder;
+    color: orange;
 }
 .creation-subject__subject-create {
     position: relative;
