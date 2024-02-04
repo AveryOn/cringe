@@ -9,16 +9,14 @@
         <!-- Panel with openning chapter -->
         <div class="show-panel__wrapped" v-show="store.openChapter.isOpen">
             <div class="units-container">
-                <div 
-                class="show-panel__wrapped--unit-item unit"
+                <unit-comp
+                class="show-panel__wrapped--unit-item"
                 v-for="unit in units"
+                :title="unit.id"
                 :key="unit.id"
                 >
-                    <p style="color:aliceblue">
-                        {{ unit.id }}
-                        {{ unit.content.message }}
-                    </p>
-                </div>
+                    {{ unit.content.message }}
+                </unit-comp>
             </div>
         </div>
     </div>
@@ -63,12 +61,7 @@ const units = ref([
 </script>
 
 <style scoped>
-.unit {
-    position: relative;
-    width: 45%;
-    height: 100px;
-    background-color: var(--bg-color-reverse);
-}
+
 
 .show-panel__wrapped--unit-item+.show-panel__wrapped--unit-item {
     margin-top: 5px;

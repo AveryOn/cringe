@@ -7,6 +7,7 @@ import subjectComp from '../UI/subjectComp.vue';
 import errorComp from '../UI/errorComp.vue';
 import successNoteComp from '../UI/successNoteComp.vue';
 import exceptNoteComp from '../UI/exceptNoteComp.vue';
+import unitComp from '../UI/unitComp.vue';
 
 chapter.compName = "chapter";
 buttonComp.compName = "buttonComp";
@@ -17,6 +18,7 @@ subjectComp.compName = 'subjectComp';
 errorComp.compName = 'errorComp';
 successNoteComp.compName = 'successNoteComp';
 exceptNoteComp.compName = 'exceptNoteComp';
+unitComp.compName = 'unitComp';
 export default [
     chapter,
     buttonComp,
@@ -27,4 +29,5 @@ export default [
     errorComp,
     successNoteComp,
     exceptNoteComp,
+    unitComp,
 ];
