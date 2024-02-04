@@ -17,12 +17,16 @@
         <ul class="chapters__list">
             <chapter 
             v-for="item in store.chapters" 
-            :id="item.id" 
-            :title="item.title"
+            :title="item.id"
             @click="() => store.toOpenChapter(item.id, item.title)"
             :key="item.id"
             >
-                {{ item.title }}
+                <p 
+                class="chapter__list--item-title" 
+                :style="(item?.color) ? { borderBottom: `3px solid ${item.color}`, color: item.color } : {}"
+                >
+                    {{ item.title }}
+                </p>
             </chapter>
         </ul>
 
@@ -83,5 +87,17 @@ const store = useMainStore();
     height: 95%;
     overflow: auto;
     list-style-type: none;
+}
+.chapter__list--item-title {
+    width: 95%;
+    text-align: start;
+    letter-spacing: 1.3px;    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 10px auto auto auto;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bolder;
 }
 </style>

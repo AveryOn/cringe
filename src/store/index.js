@@ -37,8 +37,13 @@ const useMainStore = defineStore("mainStore", () => {
 
     // Создание раздела
     function createChapter(chapter) {
-        chapter.id = randomID();
-        chapters.push(chapter);
+        try {
+            chapter.id = randomID();
+            isShowCreationManager.value = false;
+            chapters.push(chapter);
+        } catch (err) {
+            throw Error('store/index:createChapter', err)
+        }
     }
 
     // Show a Creation Manager

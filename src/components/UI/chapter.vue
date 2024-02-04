@@ -18,6 +18,7 @@
     border-radius: var(--border-radius);
     transition: box-shadow 1s ease;
     user-select: none;
+    overflow: hidden;
 }
 
 .chapter__containter:hover {
