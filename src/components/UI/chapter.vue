@@ -1,22 +1,10 @@
 <template>
-    <li class="chapter__containter" @click="() => store.toOpenChapter(uuid, title)">
-        <slot></slot> {{ "<=> " + uuid }}
+    <li class="chapter__containter">
+        <slot></slot>
     </li>
 </template>
 
 <script setup>
-import useMainStore from "../../store";
-const store = useMainStore();
-defineProps({
-    title: {
-        type: String,
-        required: true,
-    },
-    uuid: {
-        type: String,
-        required: true,
-    },
-});
 </script>
 
 <style scoped>

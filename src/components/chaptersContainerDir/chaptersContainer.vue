@@ -1,7 +1,12 @@
 <template>
     <div class="chapters-container">
         <ul class="chapters__list">
-            <chapter v-for="item in store.chapters" :uuid="item.id" :title="item.title">
+            <chapter 
+            v-for="item in store.chapters" 
+            :uuid="item.id" 
+            :title="item.title"
+            @click="() => store.toOpenChapter(item.uuid, item.title)"
+            >
                 {{ item.title }}
             </chapter>
         </ul>
