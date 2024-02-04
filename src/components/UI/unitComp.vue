@@ -1,6 +1,6 @@
 <template>
+    <!-- Единица раздела (Аналог сообщения в чате) -->
     <div class="unit">
-
         <p style="color:aliceblue">
             <slot></slot>
         </p>
