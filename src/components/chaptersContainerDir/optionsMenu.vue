@@ -1,6 +1,7 @@
 <template>
     <nav class="chapter-menu">
         <ul class="chapter-menu__list">
+
             <!-- Create new chapter -->
             <li class="list-option">
                 <option-comp class="list-option--item" @click="store.showCreationManager(true)">
@@ -9,6 +10,7 @@
                     </svg>
                 </option-comp>
             </li>
+
             <!-- Edit chapter -->
             <li class="list-option">
                 <option-comp class="list-option--item">
@@ -18,6 +20,7 @@
                     </svg>
                 </option-comp>
             </li>
+            
             <!-- Delete chapter -->
             <li class="list-option">
                 <option-comp class="list-option--item">

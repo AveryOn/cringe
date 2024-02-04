@@ -1,19 +1,11 @@
 import { defineStore } from "pinia";
-import { ref, reactive, watch, computed } from "vue";
-import generateUUID from "../uitls/randomUUID";
+import { ref, reactive } from "vue";
 import randomID from "../uitls/randomID";
 
 const useMainStore = defineStore("mainStore", () => {
     // STATE    ===============================================================================>>>>
     // Массив созданных разделов тематики 
-    const chapters = reactive([
-        { id: generateUUID(), title: "$ chapter_1" },
-        { id: generateUUID(), title: "$ chapter_2" },
-        { id: generateUUID(), title: "$ chapter_3" },
-        { id: generateUUID(), title: "$ chapter_4" },
-        { id: generateUUID(), title: "$ chapter_5" },
-        { id: generateUUID(), title: "$ chapter_6" },
-    ]);
+    const chapters = reactive([]);
     // Массив доступных предметов (жанров) для создания раздела тематики 
     const subjects = reactive([
         { id: randomID(), title: 'Math' },
@@ -22,14 +14,7 @@ const useMainStore = defineStore("mainStore", () => {
     ]);
 
     // Стек ошибок и исключений (Для отрисовки соответствующих уведомлений)
-    const errorStack = ref([
-        // {id: randomID(), message: "Error asdasdasdasdsdd1 2.sdasdasdsdd1 3.adasd 4.asaasf"},
-        // {id: randomID(), message: "Error 2"},
-        // {id: randomID(), message: "Error 3"},
-        // {id: randomID(), message: "Error 4"},
-        // {id: randomID(), message: "Error 5"},
-        // {id: randomID(), message: "Error 6"},
-    ]);
+    const errorStack = ref([]);
 
     const openChapter = reactive({
         isOpen: false,
@@ -50,12 +35,18 @@ const useMainStore = defineStore("mainStore", () => {
         openChapter.title = null;
     }
 
+    // Создание раздела
+    function createChapter(chapter) {
+        chapter.id = randomID();
+        chapters.push(chapter);
+    }
+
     // Show a Creation Manager
-    function showCreationManager(value) {
-        if (value === true) {
-            isShowCreationManager.value = value;
+    function showCreationManager(isShow) {
+        if (isShow === true) {
+            isShowCreationManager.value = isShow;
         } else {
-            isShowCreationManager.value = value;
+            isShowCreationManager.value = isShow;
         }
     }
 
@@ -96,6 +87,7 @@ const useMainStore = defineStore("mainStore", () => {
         showCreationManager,
         createSubject,
         addError,
+        createChapter,
         getChapters,
     };
 });

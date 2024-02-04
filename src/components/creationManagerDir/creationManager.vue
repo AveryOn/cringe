@@ -5,20 +5,26 @@
     @click="store.showCreationManager(false)"
     >
         <div class="creation-manager__container" @click.stop>
+
             <!-- Header -->
             <headerComp></headerComp>
+
             <!-- Wrapped -->
-            <creationWrapped @confirm-data="console.log('confirm-data')"></creationWrapped>
+            <creationWrapped 
+            @confirm-data="(chapter) => store.createChapter(chapter)"
+            ></creationWrapped>
             
         </div>
     </div>
 </template>
 
-<script setup>
+<script setup> 
 import headerComp from './headerComp.vue';
 import creationWrapped from './creationWrapped.vue';
 import useMainStore from '../../store'
+
 const store = useMainStore();
+
 </script>
 
 <style scoped>

@@ -86,7 +86,7 @@ function confirmColor(value) {
     }
 }
 
-// Подтверждение всех данных
+// Подтверждение ВСЕХ ДАННЫХ
 function confirmData() {
     // Проверяем существуют ли все обязательные данные
     if(!!title.value && !!subject.value && !!color.value) {
