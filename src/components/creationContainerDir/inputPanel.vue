@@ -27,11 +27,11 @@
 
 <script setup>
 import useMainStore from "../../store";
-import inputText from "./inputText.vue";
+import inputText from "./inputTextComp.vue";
 import { ref } from "vue";
 
 
-const value = ref("");
+const value = ref('');
 const store = useMainStore();
 
 // Функция подтверждает или отвергает сохранение нового юнита
