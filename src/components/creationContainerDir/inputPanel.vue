@@ -12,10 +12,12 @@
                     <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" />
                 </svg>
             </button>
+            <!-- Кнопка отправки Юнита -->
             <button-comp 
             class="input-panel__btn" 
             :disabled="!store.openChapter.isOpen"
             :style="(!store.openChapter.isOpen)? {color: 'gray'} : {}"
+            @click="confirmUnit"
             >
                 <strong>{{ ">_" }}</strong>
             </button-comp>
@@ -25,10 +27,22 @@
 
 <script setup>
 import useMainStore from "../../store";
-const store = useMainStore();
 import inputText from "./inputText.vue";
 import { ref } from "vue";
+
+
 const value = ref("");
+const store = useMainStore();
+
+// Функция подтверждает или отвергает сохранение нового юнита
+function confirmUnit() {
+    try {
+
+    } catch (err) {
+        throw new Error(`components/inputPanel:confirmUnit => ${err}`);
+    }
+}
+
 </script>
 
 <style scoped>

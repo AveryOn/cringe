@@ -1,4 +1,5 @@
 <template>
+    <!-- Панель отрисовки Юнитов -->
     <div class="creation-container__show-panel">
         <!-- Header -->
         <headerComp></headerComp>
