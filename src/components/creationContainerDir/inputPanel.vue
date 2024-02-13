@@ -1,8 +1,12 @@
 <template>
     <form class="creation-container__input-panel" @submit.prevent>
-        <inputText v-model="value"></inputText>
+        <inputText v-model="text"></inputText>
         <div class="input-panel__buttons">
-            <button class="input-panel__btn">
+            <!-- Кнопка отправки Юнита -->
+            <button 
+            class="input-panel__btn"
+            @click="confirmUnit"
+            >
                 <svg 
                 class="icon-send" 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -12,12 +16,12 @@
                     <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" />
                 </svg>
             </button>
-            <!-- Кнопка отправки Юнита -->
+
+            <!--  >_  -->
             <button-comp 
             class="input-panel__btn" 
             :disabled="!store.openChapter.isOpen"
             :style="(!store.openChapter.isOpen)? {color: 'gray'} : {}"
-            @click="confirmUnit"
             >
                 <strong>{{ ">_" }}</strong>
             </button-comp>
@@ -28,16 +32,28 @@
 <script setup>
 import useMainStore from "../../store";
 import inputText from "./inputTextComp.vue";
-import { ref } from "vue";
+import { ref, defineEmits } from "vue";
 
-
-const value = ref('');
 const store = useMainStore();
+const emit = defineEmits(['confirmUnit']);
+
+const text = ref('');
+const files = ref([]);
+const audioVoice = ref(null);
 
 // Функция подтверждает или отвергает сохранение нового юнита
 function confirmUnit() {
     try {
-
+        if(!!text.value || !!files.value.length || !!audioVoice.value) {
+            emit('confirmUnit', { 
+                text: text.value, 
+                files: files.value,
+                audioVoice: audioVoice.value,
+            });
+            text.value = '';
+            files.value = [];
+            audioVoice.value = null;
+        } else return;
     } catch (err) {
         throw new Error(`components/inputPanel:confirmUnit => ${err}`);
     }

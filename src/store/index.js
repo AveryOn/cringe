@@ -23,19 +23,22 @@ const useMainStore = defineStore("mainStore", () => {
         isOpen: false,
         uuid: null,
         title: null,
+        subject: null,
     });
     const isShowCreationManager = ref(false);
 
     // ==========================================    ACTIONS    ===============================================================================>>>>
-    function toOpenChapter(uuid, title) {
+    function toOpenChapter(uuid, title, subject) {
         openChapter.isOpen = true;
         openChapter.uuid = uuid;
         openChapter.title = title;
+        openChapter.subject = subject;
     }
     function toCloseChapter() {
         openChapter.isOpen = false;
         openChapter.uuid = null;
         openChapter.title = null;
+        openChapter.subject = null;
     }
 
     // Создание раздела

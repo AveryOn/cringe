@@ -12,7 +12,7 @@
             <div class="units-container">
                 <unit-comp
                 class="show-panel__wrapped--unit-item"
-                v-for="unit in units"
+                v-for="unit in props.unitList"
                 :title="unit.id"
                 :key="unit.id"
                 >
@@ -26,38 +26,26 @@
 <script setup>
 import headerComp from "./headercomp.vue";
 import useMainStore from "../../store";
-import generateUUID from '../../uitls/randomUUID';
-import { ref } from 'vue';
+import { defineProps, watch } from 'vue';
 const store = useMainStore();
 
-const units = ref([
-    {
-        id: generateUUID(),
-        title: null,
-        content: {
-            message: 'Hello world1',
-            image: [],
-            video: [],
-            audio: [],
-        },
-        chapterID: null,
-        createdAt: null,
-        updatedAt: null,
-    },
-    {
-        id: generateUUID(),
-        title: null,
-        content: {
-            message: 'Hello world2',
-            image: [],
-            video: [],
-            audio: [],
-        },
-        chapterID: null,
-        createdAt: null,
-        updatedAt: null,
-    },
-]);
+const props = defineProps({
+    unitList: {
+        type: Array,
+        default: () => [],
+    }
+});
+
+// Отслеживаение изменения длины массива юнитов и автоматический скролл в самый низ блока юнитов 
+watch(() => props.unitList.length, () => {
+    const wrapper = document.querySelector('.show-panel__wrapped');
+    const beforeScroll = wrapper.scrollHeight;
+    setTimeout(() => {
+        wrapper.scroll({
+            top: beforeScroll,
+        });
+    }, 0);
+});
 
 </script>
 

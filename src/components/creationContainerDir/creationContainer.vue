@@ -1,15 +1,43 @@
 <!-- Containter for watching and creation a chapters -->
 <template>
     <div class="creation-container">
-        <showPanel></showPanel>
+        <showPanel :unit-list="units"></showPanel>
         <!-- Container for creation a chapter -->
-        <inputPanel></inputPanel>
+        <inputPanel @confirm-unit="confirmUnit"></inputPanel>
     </div>
 </template>
 
 <script setup>
-import showPanel from "./showPanel.vue";
+import showPanel from "./showpanel.vue";
 import inputPanel from "./inputPanel.vue";
+import randomUUID from '../../uitls/randomUUID';
+import useMainStore from '../../store/index';
+import { ref } from 'vue';
+
+const store = useMainStore();
+const units = ref([]);
+
+// Подтверждение создания юнита
+async function confirmUnit(data) {
+    try {
+        units.value.push({
+            id: randomUUID(), 
+            title: null,
+            content: {
+                message: data.text,
+                files: data.files,
+                voice: data.audioVoice,
+            },
+            subject: store.openChapter.subject,
+            chapterID: store.openChapter.uuid,
+            createdAt: Date.now(),
+            updatedAt: Date.now(),
+        })
+    } catch (err) {
+        throw new Error(`components/creationContainer:confirmUnit => ${err}`);
+    }
+}
+
 </script>
 
 <style scoped>
