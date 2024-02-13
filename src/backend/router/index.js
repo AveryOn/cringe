@@ -1,7 +1,7 @@
 import express from 'express';
 const mainRouter = express.Router();
 
-router.get('/', (req, res) => {
+mainRouter.get('/', (req, res) => {
     res.send('Привет, мир!');
 });
 

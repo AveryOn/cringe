@@ -1,20 +1,20 @@
 import express from 'express';
 import cors from 'cors';
-import mainRouter from './router';
+import mainRouter from './router/index.js';
 
 const app = express();
+
+// ==================================================   CORS   =================================================
+app.use(cors());
 
 
 // =================================================   SETTING   =================================================
 app.use(express.json()); // для парсинга application/json
 app.use(express.urlencoded({ extended: false })); // для парсинга application/x-www-form-urlencoded
 
+ 
 // =================================================   ROUTER   =================================================
 app.use('/', mainRouter);
-
-
-// ==================================================   CORS   =================================================
-app.use(cors( {origin: '*'} ));
 
 
 function serverStart() {
@@ -23,4 +23,6 @@ function serverStart() {
     });
 }
 
-export {serverStart};
+serverStart()
+
+// export { serverStart };
