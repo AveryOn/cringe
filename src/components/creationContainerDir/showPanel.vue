@@ -30,6 +30,7 @@ import { defineProps, watch } from 'vue';
 const store = useMainStore();
 
 const props = defineProps({
+    // Массив юнитов
     unitList: {
         type: Array,
         default: () => [],
