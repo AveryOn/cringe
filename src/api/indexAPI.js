@@ -16,8 +16,26 @@ async function testGet() {
     }
 }
 
+async function testPost() {
+    try {
+        const response = await axios.post(hostName + '/', {
+            id: '123',
+            name: 'John',
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        console.log(response);
+    } catch (err) {
+        console.log(err);
+        throw new Error(`api/indexAPI:testGet => ${err}`)
+    }
+}
+
 export {
     hostName,
 
     testGet,
+    testPost,
 }

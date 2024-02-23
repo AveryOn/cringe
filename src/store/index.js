@@ -6,8 +6,8 @@ const useMainStore = defineStore("mainStore", () => {
     // ==========================================    STATE    ===============================================================================>>>>
     // Массив созданных разделов тематики 
     const chapters = reactive([
-        {title: 'Example', subject: 'Math', color: '#f038ea'},
-        {title: 'Another Example', subject: 'Frontend', color: '#38a0f0'},
+        { title: 'Example', subject: 'Math', color: '#f038ea' },
+        { title: 'Another Example', subject: 'Frontend', color: '#38a0f0' },
     ]);
     // Массив доступных предметов (жанров) для создания раздела тематики 
     const subjects = reactive([

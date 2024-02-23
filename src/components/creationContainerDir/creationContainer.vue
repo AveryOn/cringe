@@ -12,7 +12,7 @@ import showPanel from "./showpanel.vue";
 import inputPanel from "./inputPanel.vue";
 import randomUUID from '../../uitls/randomUUID';
 import useMainStore from '../../store/index';
-import { testGet } from "../../api/indexAPI";
+import { testPost } from "../../api/indexAPI";
 import { ref } from 'vue';
 
 const store = useMainStore();
@@ -34,7 +34,8 @@ async function confirmUnit(data) {
             createdAt: Date.now(),
             updatedAt: Date.now(),
         });
-        await testGet();
+        // TEST
+        await testPost();
     } catch (err) {
         throw new Error(`components/creationContainer:confirmUnit => ${err}`);
     }
