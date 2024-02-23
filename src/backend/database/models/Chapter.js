@@ -26,6 +26,7 @@ Chapter.init({
     sequelize: Connection.sequelize,
     modelName: 'Chapter',
     tableName: 'Chapters',
+    paranoid: true,
 });
 
 export { Chapter };

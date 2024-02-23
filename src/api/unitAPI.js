@@ -1,27 +1,29 @@
-import randomUUID from '@/uitls/randomUUID'
+import axios from 'axios';
+import { hostName } from './indexAPI';
 
 // Unit - это сущность сообщения в разделе (аналог классическим сообщениям в чатах)
 
-// Получени юнитов из БД
-function fetchUnits() {
-    return [
-        { 
-            id: randomUUID(), 
-            title: null,
-            content: {
-                message: null,
-                image: [],
-                video: [],
-                audio: [],
-            },
-            subject: null,
-            chapterID: null,
-            createdAt: null,
-            updatedAt: null,
-        }
-    ]
+// Создание нового юнита на сервере
+async function createUnit(title, message, images, videos, audios, subject) {
+    try {
+        const response = await axios.post(hostName + '/units/create', {
+            title,
+            message,
+            images,
+            videos,
+            audios,
+            subject,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        console.log(response);
+    } catch (err) {
+        throw new Error(`api/unitAPI:createUnit => ${err}`);
+    }
 }
 
 export {
-    fetchUnits,
+    createUnit
 }

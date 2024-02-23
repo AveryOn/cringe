@@ -7,7 +7,6 @@ import Models from './models/index.js';
 // Controllers
 import Controllers from './controllers/index.js';
 
-
 export {
     Connection,
     Models,

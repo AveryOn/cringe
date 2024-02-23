@@ -12,7 +12,7 @@ import showPanel from "./showpanel.vue";
 import inputPanel from "./inputPanel.vue";
 import randomUUID from '../../uitls/randomUUID';
 import useMainStore from '../../store/index';
-import { testPost } from "../../api/indexAPI";
+import { createUnit } from '../../api/unitAPI';
 import { ref } from 'vue';
 
 const store = useMainStore();
@@ -21,21 +21,7 @@ const units = ref([]);
 // Подтверждение создания юнита
 async function confirmUnit(data) {
     try {
-        units.value.push({
-            id: randomUUID(), 
-            title: null,
-            content: {
-                message: data.text,
-                files: data.files,
-                voice: data.audioVoice,
-            },
-            subject: store.openChapter.subject,
-            chapterID: store.openChapter.uuid,
-            createdAt: Date.now(),
-            updatedAt: Date.now(),
-        });
-        // TEST
-        await testPost();
+        await createUnit(null, data.text, null, null, null, 'Example');
     } catch (err) {
         throw new Error(`components/creationContainer:confirmUnit => ${err}`);
     }

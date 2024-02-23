@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mainRouter from './router/index.js';
+import unitRouter from './router/unitRouter.js';
 import Logger from './logger/index.js';
 // DB connection
 import { Connection, Controllers, Models } from './database/index.js';
@@ -11,7 +12,7 @@ Connection.checkConnectionDB().catch((err) => {
     throw new Error(`server:checkConnectionDB  => ${err}`);
 });
 // =============================================   Synchronized DB   =================================================
-// Connection.sequelize.sync({alter: true});
+// Connection.sequelize.sync({force: true});
 
 // ==================================================   CORS   =================================================
 app.use(cors({
@@ -29,6 +30,7 @@ app.use(express.urlencoded({ extended: false })); // для парсинга app
 
 // =================================================   ROUTER   =================================================
 app.use('/', mainRouter);
+app.use('/units', unitRouter);
 
 
 function serverStart() {
