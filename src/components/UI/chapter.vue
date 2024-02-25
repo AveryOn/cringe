@@ -5,6 +5,18 @@
 </template>
 
 <script setup>
+import useMainStore from "../../store";
+const store = useMainStore();
+defineProps({
+    title: {
+        type: String,
+        required: true,
+    },
+    uuid: {
+        type: String,
+        required: true,
+    },
+});
 </script>
 
 <style scoped>
