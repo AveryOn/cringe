@@ -18,9 +18,8 @@ async function testGet() {
 
 async function testPost() {
     try {
-        const response = await axios.post(hostName + '/', {
-            id: '123',
-            name: 'John',
+        const response = await axios.post(hostName + '/subjects/create', {
+            value: 'Example'
         }, {
             headers: {
                 'Content-Type': 'application/json',

@@ -36,12 +36,6 @@ Unit.init({
         allowNull: true,
         unique: false,
     },
-    subject: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        unique: false,
-    },
-
 }, {
     sequelize: Connection.sequelize,
     modelName: 'Unit',

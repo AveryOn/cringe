@@ -2,27 +2,23 @@
 import Connection from '../connect.js';
 import { Model, DataTypes } from 'sequelize';
 
-class Chapter extends Model {};
+class Subject extends Model {};
 
-Chapter.init({
+Subject.init({
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
     },
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    color: {
+    value: {
         type: DataTypes.STRING,
         allowNull: false,
     },
 }, {
     sequelize: Connection.sequelize,
-    modelName: 'Chapter',
-    tableName: 'Chapters',
+    modelName: 'Subject',
+    tableName: 'Subjects',
     paranoid: true,
 });
 
-export { Chapter };
+export { Subject };

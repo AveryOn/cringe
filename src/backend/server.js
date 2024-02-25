@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import mainRouter from './router/index.js';
 import unitRouter from './router/unitRouter.js';
+import subjectRouter from './router/subjectRouter.js';
+import chapterRouter from './router/chapterRouter.js';
 import Logger from './logger/index.js';
 // DB connection
 import { Connection, Controllers, Models } from './database/index.js';
@@ -31,6 +33,8 @@ app.use(express.urlencoded({ extended: false })); // для парсинга app
 // =================================================   ROUTER   =================================================
 app.use('/', mainRouter);
 app.use('/units', unitRouter);
+app.use('/subjects', subjectRouter);
+app.use('/chapters', chapterRouter);
 
 
 function serverStart() {
