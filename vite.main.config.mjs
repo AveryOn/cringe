@@ -8,4 +8,5 @@ export default defineConfig({
     conditions: ['node'],
     mainFields: ['module', 'jsnext:main', 'jsnext'],
   },
+
 });

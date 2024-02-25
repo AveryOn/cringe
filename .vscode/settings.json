@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "cringeDB",
+            "database": "${workspaceFolder:cringe}/src/backend/DB/storage.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

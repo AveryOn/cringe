@@ -1,6 +1,6 @@
 <template>
-    <li class="chapter__containter" @click="() => store.toOpenChapter(uuid, title)">
-        <slot></slot> {{ "<=> " + uuid }}
+    <li class="chapter__containter">
+        <slot></slot>
     </li>
 </template>
 
@@ -30,6 +30,7 @@ defineProps({
     border-radius: var(--border-radius);
     transition: box-shadow 1s ease;
     user-select: none;
+    overflow: hidden;
 }
 
 .chapter__containter:hover {
