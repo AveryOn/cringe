@@ -28,6 +28,10 @@ async function convertChapterForClient(chapters) {
         // Если полученные данные представлены в виде обьекта, то выполняем один запрос для Subject
         if (typeof chapters === 'object' && chapters !== null) {
             const subject = await Subject.findByPk(chapters?.subjectId);
+            // Поднимаем исключение если subject относится к удаленным
+            if(subject === null) {
+                throw new Error(`Не удалось использовать subject так как он мягко удален или его не существует`);
+            }
             return {
                 id: chapters?.id,
                 title: chapters?.title,
@@ -36,7 +40,7 @@ async function convertChapterForClient(chapters) {
                 updatedAt: chapters?.updatedAt,
                 createdAt: chapters?.createdAt,
             }
-        }
+        } else Logger.initLog().err('convertChapterForClient =>  Передаваемый аргумент не является объектом')
     }
 }
 
@@ -92,7 +96,7 @@ async function getChapterByID(chapterID) {
     }
 }
 
-// Обновление существующей тематики по ID
+// Обновление существующего раздела по ID
 async function updateChapter(chapterID, title, subjectId, color, subjectValue) {
     const transaction = await Connection.sequelize.transaction();
     // Если SubjectValue имеет какое-то значение то это говорит о том, что на клиенте пытаются обновить существующий раздел, создавая при этом новую тематику subject
@@ -119,14 +123,15 @@ async function updateChapter(chapterID, title, subjectId, color, subjectValue) {
                 const chapter = await Chapter.findByPk(chapterID, { transaction });
                 const updatedChapter = chapter.set({ title, subjectId, color });
                 await updatedChapter.save({ transaction });
-                const readyChapter = await convertChapterForClient(updatedChapter);
+                const readyChapter = await convertChapterForClient(updatedChapter)
                 await transaction.commit();
                 Logger.initLogBg().success('DATABASE -> controllers/chapterController:updateChapter => Chapter<_id> успешно обновлен в БД!');
                 resolve(readyChapter);
+
             }
         } catch (err) {
             await transaction.rollback();
-            Logger.initLogBg().err('DATABASE -> controllers/chapterController:updateChapter  =>', err);
+            Logger.initLogBg().err('DATABASE -> controllers/chapterController:updateChapter');
             reject(err);
         }
     });

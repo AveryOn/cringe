@@ -30,8 +30,8 @@ chapterRouter.get('/', async(req, res) => {
 
 // Получение раздела по ID
 chapterRouter.get('/:id', async(req, res) => {
+    const { id } = req.params;
     try {
-        const { id } = req.params;
         const chapter = await chapterController.getChapterByID(id);
         res.status(200).send({ status: 200, data: chapter });
         Logger.initLog().log(`GET -> host/chapters/${id} => status: 200`);
@@ -42,21 +42,21 @@ chapterRouter.get('/:id', async(req, res) => {
 
 // Обновление существующего раздела по ID
 chapterRouter.put('/:id/update', async(req, res) => {
+    const { id } = req.params;
     try {
-        const { id } = req.params;
         const { title, subjectId, color, subjectValue } = req.body;
         const updatedChapter = await chapterController.updateChapter( id, title, subjectId, color, subjectValue);
         res.status(200).send({ status: 200, data: updatedChapter });
         Logger.initLog().log(`POST -> host/chapters/${id}/update => status: 200`);
     } catch (err) {
-        res.status(500).send(`POST -> Ошибка при обновлении Chapter${id} => ${err?.message}`);
+        res.status(500).send(`POST -> Ошибка при обновлении Chapter:${id} => ${err?.message}`);
     }
 });
 
 // Удаление существующей тематики по ID
 chapterRouter.delete('/:id/delete', async(req, res) => {
+    const { id } = req.params;
     try {
-        const { id } = req.params;
         await chapterController.deleteSubject(id);
         res.status(200).send({ status: 200 });
         Logger.initLog().log(`POST -> host/subjects/${id}/delete => status: 200`);
