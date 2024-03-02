@@ -44,5 +44,3 @@ function serverStart() {
 }
 
 serverStart();
-
-// export { serverStart };

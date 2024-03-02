@@ -9,6 +9,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "rebuild": "electron-rebuild -f -w yourmodule",
     "publish": "electron-forge publish",
     "lint": "eslint .",
     "format": "prettier --write"
@@ -32,16 +33,20 @@
     "@typescript-eslint/parser": "^6.19.0",
     "@vitejs/plugin-vue": "^5.0.3",
     "electron": "28.1.4",
+    "electron-rebuild": "^3.2.9",
     "eslint": "^8.56.0",
     "eslint-plugin-vue": "^9.20.1",
     "prettier": "^3.2.4"
   },
   "dependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "axios": "^1.6.7",
     "chalk": "^5.3.0",
     "cors": "^2.8.5",
     "electron-squirrel-startup": "^1.0.0",
     "express": "^4.18.2",
+    "pg-hstore": "^2.3.4",
     "pinia": "^2.1.7",
     "sequelize": "^6.37.1",
     "sqlite3": "^5.1.7",
