@@ -1,8 +1,8 @@
 <!-- SUBJECT -->
 <template>
     <creationBlock 
-    :is-confirm="props.isConfirm"
-    :is-except="props.isExcept"
+    :is-confirm="isSuccess"
+    :is-except="isExcept"
     >
         <!-- header -->
         <template v-slot:header>
@@ -20,7 +20,7 @@
                     v-for="subject in store.subjects"
                     :key="subject.id"
                     >
-                        {{ subject.title }}
+                        {{ subject.value }}
                     </subject-comp>
                 </div>
                 <!-- SELECTED SUBJECT -->
@@ -28,9 +28,9 @@
                     Your choose: 
                     <p 
                     class="subject-example"
-                    :style="(selectedSubject === 'null') ? {color: 'var(--color-error)'} : {}"
+                    :style="(selectedSubjectValue === 'null') ? {color: 'var(--color-error)'} : {}"
                     >
-                        {{ selectedSubject }}
+                        {{ selectedSubjectValue }}
                     </p> 
                 </p>
                 <!-- FORM FOR CREATE A SUBJECT -->
@@ -81,28 +81,20 @@
 <script setup>
 import creationBlock from './creationBlock.vue';
 import useMainStore from '../../store/';
-import { ref, defineProps, defineEmits } from 'vue';
+import { createSubjectDB } from '../../api/subjectAPI';
+import { ref, defineEmits } from 'vue';
 
-const props = defineProps({
-    isConfirm: {
-        type: Boolean,
-        required: true,
-        default: false,
-    },
-    isExcept: {
-        type: Boolean,
-        required: true,
-        default: false,
-    },
-});
 
 const emit = defineEmits(['confirmSubject']);
 
 const store = useMainStore();
 const title = ref('');
 const acceptableLetters = ref(50);
-const selectedSubject = ref('null');
+const selectedSubjectValue = ref('null');
+const selectedSubject = ref(null);
 const isCreateNewSubject = ref(false);
+const isExcept = ref(false);
+const isSuccess = ref(false);
 
 // Управляет строкой ограничения символов ввода
 function remainLetters() {
@@ -111,7 +103,6 @@ function remainLetters() {
     if(acceptableLetters.value <= 0) {
         remainLetters.style.color = 'var(--color-error)';
         remainLetters.style.fontWeight = 'bolder';
-        console.log('Всё харош чувак');
     }
     // Если допустимое оставшееся кол-во символов более нуля то подсветка пропадает
     if((50 - title.value.split('').length) >= 0) {
@@ -123,24 +114,38 @@ function remainLetters() {
 
 // Устанавливает выбранный subject в переменную
 function setSubject(subject) {
-    selectedSubject.value = subject.title;
+    selectedSubjectValue.value = subject.value;
+    selectedSubject.value = subject;
 }
 
-// Создание нового предмета
-function createNewSubject() {
-    const subjectList = document.querySelector('.creation-subject__subject-list');
-    store.createSubject(title.value);
-    handlerOpenClosed();
-    selectedSubject.value = title.value;
-    title.value = '';
-    confirmChooseSubject();
-    setTimeout(() => {
-        const afterScroll = subjectList.scrollHeight;
-        subjectList.scroll({
-            top: afterScroll,
-            behavior: 'smooth',
-        })
-    }, 0);
+// Создание новой тематики
+async function createNewSubject() {
+    try {
+        if(title.value.length) {
+            isExcept.value = false;
+            isSuccess.value = true;
+            // Получаем элемент списка тематик для их скролла при переполнении 
+            const subjectList = document.querySelector('.creation-subject__subject-list');
+            selectedSubject.value = await createSubjectDB(title.value);
+            store.subjects.push(selectedSubject.value);
+            handlerOpenClosed();
+            selectedSubjectValue.value = title.value;
+            title.value = '';
+            confirmChooseSubject();
+            setTimeout(() => {
+                const afterScroll = subjectList.scrollHeight;
+                subjectList.scroll({
+                    top: afterScroll,
+                    behavior: 'smooth',
+                })
+            }, 0);
+        } else {
+            isExcept.value = true;
+        }
+    } catch (err) {
+        throw new Error(`components/creationManagerDir/creationSubject.vue: createNewSubject  => ${err}`);
+    }
+
 }
 
 // Подтверждение установленного предмета subject

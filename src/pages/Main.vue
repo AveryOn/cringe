@@ -18,8 +18,21 @@
 import chaptersContainer from "../components/chaptersContainerDir/chaptersContainer.vue";
 import creationContainer from "../components/creationContainerDir/creationContainer.vue";
 import creationManager from "../components/creationManagerDir/creationManager.vue";
+import { onMounted } from "vue";
 import useMainStore from "../store";
+import { getAllChaptersDB } from '../api/chapterAPI';
+import { getAllSubjectsDB } from '../api/subjectAPI';
 const store = useMainStore();
+
+onMounted(async () => {
+    try {
+        store.chapters = await getAllChaptersDB();
+        store.subjects = await getAllSubjectsDB();
+        
+    } catch (err) {
+        throw new Error(`pages/Main.vue: onMounted[fetch chapters]  => ${err}`);        
+    }
+})
 </script>
 
 <style scoped>

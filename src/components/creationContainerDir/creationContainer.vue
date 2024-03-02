@@ -10,22 +10,44 @@
 <script setup>
 import showPanel from "./showpanel.vue";
 import inputPanel from "./inputPanel.vue";
-import randomUUID from '../../uitls/randomUUID';
-import useMainStore from '../../store/index';
-import { createUnit } from '../../api/unitAPI';
-import { ref } from 'vue';
+import { createUnit, getAllUnitsDB } from '../../api/unitAPI';
+import { ref, watch } from 'vue';
+import useMainStore from "../../store";
 
 const store = useMainStore();
+
 const units = ref([]);
 
-// Подтверждение создания юнита
-async function confirmUnit(data) {
+// Создание нового юнита
+async function confirmUnit(unit) {
     try {
-        await createUnit(null, data.text, null, null, null, 'Example');
+        const { title, message, images, videos, audios } = unit;
+        const createdUnit = await createUnit(
+            title, 
+            message, 
+            images, 
+            videos, 
+            audios, 
+            store.openChapter.subject,
+            store.openChapter.id,
+        );
+        console.log(createdUnit);
+        units.value.push(createdUnit);
     } catch (err) {
-        throw new Error(`components/creationContainer:confirmUnit => ${err}`);
+        throw new Error(`components/creationContainerDir/creationContainer.vue: confirmUnit => ${err}`);
     }
 }
+
+// Получение списка юнитов выбранного раздела
+watch(() => store.openChapter.id, async (newValue) => {
+    console.log(newValue);
+    try {
+        units.value = await getAllUnitsDB(store.openChapter.id);
+        console.log(units.value);
+    } catch (err) {
+        throw new Error(`components/creationContainerDir/creationContainer.vue: watch: [fetch units] => ${err}`);
+    }
+});
 
 </script>
 

@@ -13,8 +13,6 @@
         <creationSubject 
         class="creation-wrapped__block"
         @confirm-subject="confirmSubject"
-        :is-confirm="isConfirmSubject"
-        :is-except="isExceptSubject"
         ></creationSubject>
 
         <!-- Input Color -->
@@ -24,6 +22,8 @@
         :is-confirm="isConfirmColor"
         :is-except="isExceptColor"
         ></creationColor>
+
+        <!-- Confirm Btn -->
         <button-comp 
         class="creation-wrapped__confirm"
         @click="confirmData"
@@ -43,15 +43,14 @@ const emit = defineEmits(['confirm-data']);
 
 // Пропсы для отображения сообщения об успехе сохранения
 const isConfirmTitle = ref(false);
-const isConfirmSubject = ref(false);
 const isConfirmColor = ref(false);
 
 // Пропсы для отображения сообщения об исключении/сбое сохранения
 const isExceptTitle = ref(false);
-const isExceptSubject = ref(false);
 const isExceptColor = ref(false);
 
 const title = ref('');
+const subjectId = ref(null);
 const subject = ref('');
 const color = ref('');
 
@@ -66,14 +65,9 @@ function confirmTitle(value) {
     }
 }
 // Обработка подтверждения Subject
-function confirmSubject(value) {
-    if(!!value.length && value !== 'null') { 
-        subject.value = value;
-        isExceptSubject.value = false;
-        isConfirmSubject.value = true;
-    } else { 
-        isExceptSubject.value = true;
-    }
+function confirmSubject(createdSubject) {
+    subject.value = createdSubject.value;
+    subjectId.value = createdSubject.id
 }
 // Обработка подтверждения Color
 function confirmColor(value) {
@@ -93,7 +87,7 @@ function confirmData() {
         // Отправляем данные на сервер
         emit('confirm-data', {
             title: title.value,
-            subject: subject.value,
+            subjectId: subjectId.value,
             color: color.value,
         });
     } else {

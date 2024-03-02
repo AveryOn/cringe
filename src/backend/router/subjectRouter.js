@@ -9,8 +9,8 @@ import subjectController from '../database/controllers/subjectController.js';
 subjectRouter.post('/create', async(req, res) => {
     try {
         const { value } = req.body;
-        await subjectController.createSubject(value)
-        res.status(200).send({ status: 200 });
+        const subject = await subjectController.createSubject(value)
+        res.status(200).send({ status: 200, data: subject });
         Logger.initLog().log('POST -> host/subjects/create => status: 200');
     } catch (err) {
         res.status(500).send(`POST -> Ошибка при создании Subject => ${err?.message}`);

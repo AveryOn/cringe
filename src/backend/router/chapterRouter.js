@@ -8,8 +8,8 @@ import chapterController from '../database/controllers/chapterController.js';
 // Создание нового раздела
 chapterRouter.post('/create', async(req, res) => {
     try {
-        const { title, subjectID, color } = req.body;
-        const chapter = await chapterController.createChapter(title, subjectID, color);
+        const { title, subjectId, color } = req.body;
+        const chapter = await chapterController.createChapter(title, subjectId, color);
         res.status(200).send({ status: 200, data: chapter });
         Logger.initLog().log('POST -> host/chapters/create => status: 200');
     } catch (err) {

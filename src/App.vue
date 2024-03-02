@@ -29,6 +29,7 @@ import navbarComp from "./components/navbarComp.vue";
     --color-input: black;
     --color-text: black;
     --color-active: #fa9c30;
+    --color-subject-name: #fa9c30;
     --color-reverse: white;
     --color-alias: rgb(254, 92, 254);
     --color-error: rgb(230, 60, 60);

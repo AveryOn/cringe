@@ -7,8 +7,8 @@ import unitsController from '../database/controllers/unitsController.js';
 // Создание нового Юнита
 unitRouter.post('/create', async(req, res) => {
     try {
-        const { title, message, images, videos, audios } = req.body;
-        const unit = await unitsController.createUnit(title, message, images, videos, audios);
+        const { title, message, images, videos, audios, chapterId } = req.body;
+        const unit = await unitsController.createUnit(title, message, images, videos, audios, chapterId);
         res.status(200).send({ status: 200, data: unit });
         Logger.initLog().log('POST -> host/units/create => status: 200');
     } catch (err) {
@@ -17,9 +17,10 @@ unitRouter.post('/create', async(req, res) => {
 });
 
 // Получение всех юнитов с БД
-unitRouter.get('/', async(req, res) => {
+unitRouter.get('/:chapterId', async(req, res) => {
     try {
-        const units = await unitsController.getAllUnits();
+        const { chapterId } = req.params;
+        const units = await unitsController.getAllUnits(chapterId);
         res.status(200).send({ status: 200, data: units });
         Logger.initLog().log('GET -> host/units/ => status: 200');
     } catch (err) {

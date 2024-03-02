@@ -1,6 +1,6 @@
 <template>
     <form class="creation-container__input-panel" @submit.prevent>
-        <inputText v-model="text"></inputText>
+        <inputText v-model="message"></inputText>
         <div class="input-panel__buttons">
             <!-- Кнопка отправки Юнита -->
             <button 
@@ -37,22 +37,28 @@ import { ref, defineEmits } from "vue";
 const store = useMainStore();
 const emit = defineEmits(['confirmUnit']);
 
-const text = ref('');
-const files = ref([]);
-const audioVoice = ref(null);
+const title = ref(null);
+const message = ref('');
+const videos = ref([]);
+const audios = ref([]);
+const images = ref([]);
 
 // Функция подтверждает или отвергает сохранение нового юнита
 function confirmUnit() {
     try {
-        if(!!text.value || !!files.value.length || !!audioVoice.value) {
+        if(message.value.length || images.value.length || videos.value.length || audios.value.length) {
             emit('confirmUnit', { 
-                text: text.value, 
-                files: files.value,
-                audioVoice: audioVoice.value,
+                title: title.value,
+                message: message.value,
+                images: images.value,
+                videos: videos.value,
+                audios: audios.value,
             });
-            text.value = '';
-            files.value = [];
-            audioVoice.value = null;
+            title.value = null;
+            message.value = '';
+            videos.value = [];
+            images.value = [];
+            audios.value = [];
         } else return;
     } catch (err) {
         throw new Error(`components/inputPanel:confirmUnit => ${err}`);

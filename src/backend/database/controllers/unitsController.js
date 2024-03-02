@@ -1,6 +1,7 @@
 import { Unit } from '../models/Unit.js';
 import Connection from '../connect.js';
 import Logger from '../../logger/index.js';
+import { Op } from 'sequelize';
 
 // Функция распаковывает полученные данные. Поля images/audios/videos - распаковываются с JSON 
 function unpackageUnit(units) {
@@ -28,7 +29,7 @@ function unpackageUnit(units) {
 }
 
 // Создание Юнита
-async function createUnit(title, message, images, videos, audios) {
+async function createUnit(title, message, images, videos, audios, chapterId) {
     const transaction = await Connection.sequelize.transaction();
     try {
         const imagesString = JSON.stringify(images);
@@ -42,6 +43,7 @@ async function createUnit(title, message, images, videos, audios) {
             images: imagesString,
             videos: videosString,
             audios: audiosString,
+            chapterId,
         }, {transaction});
         const readyUnit = await unpackageUnit(unit);
         await transaction.commit();
@@ -54,10 +56,16 @@ async function createUnit(title, message, images, videos, audios) {
 }
 
 // Полчуение всех юнитов с БД
-async function getAllUnits() {
+async function getAllUnits(chapterId) {
     const transaction = await Connection.sequelize.transaction();
     try {
-        const units = await Unit.findAll({ transaction });
+        const units = await Unit.findAll({
+            where: {
+                chapterId: {
+                    [Op.eq]:  chapterId,
+                }
+            }
+        }, { transaction });
         // Конвертирование объектов unit для распаковки с JSON-формата audios/video/images
         const convertedUnits = await unpackageUnit(units);
         await transaction.commit();

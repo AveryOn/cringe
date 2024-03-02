@@ -18,14 +18,14 @@
             <chapter 
             v-for="item in store.chapters" 
             :title="item.id"
-            @click="() => store.toOpenChapter(item.id, item.title)"
+            @click="() => store.toOpenChapter(item.id, item.title, item.subject)"
             :key="item.id"
             >
                 <p 
                 class="chapter__list--item-title" 
                 :style="(item?.color) ? { borderBottom: `3px solid ${item.color}`, color: item.color } : {}"
                 >
-                    {{ item.title }}
+                    <p>{{ item.title }}</p> <p class="item__subject">{{ item?.subject }}</p>
                 </p>
             </chapter>
         </ul>
@@ -89,6 +89,7 @@ const store = useMainStore();
     list-style-type: none;
 }
 .chapter__list--item-title {
+    position: relative;
     width: 95%;
     text-align: start;
     letter-spacing: 1.3px;    
@@ -99,5 +100,12 @@ const store = useMainStore();
     padding: 5px;
     font-size: 18px;
     font-weight: bolder;
+}
+.item__subject {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 12px;
+    color: var(--color-subject-name);
 }
 </style>

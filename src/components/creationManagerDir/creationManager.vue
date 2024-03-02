@@ -11,7 +11,7 @@
 
             <!-- Wrapped -->
             <creationWrapped 
-            @confirm-data="(chapter) => store.createChapter(chapter)"
+            @confirm-data="(chapter) => confirmData(chapter)"
             ></creationWrapped>
             
         </div>
@@ -22,8 +22,20 @@
 import headerComp from './headerComp.vue';
 import creationWrapped from './creationWrapped.vue';
 import useMainStore from '../../store'
+import { createChapterDB } from '../../api/chapterAPI';
 
 const store = useMainStore();
+
+// Подтверждение данных формы
+async function confirmData(chapter) {
+    try {
+        const { title, subjectId, color } = chapter;
+        const createdChapter = await createChapterDB(title, subjectId, color);
+        store.chapters.push(createdChapter);
+    } catch (err) {
+        throw new Error(`components/creationManager.vue: confirmData  => ${err}`);
+    }
+}
 
 </script>
 

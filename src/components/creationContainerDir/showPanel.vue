@@ -10,13 +10,14 @@
         <!-- Panel with openning chapter -->
         <div class="show-panel__wrapped" v-show="store.openChapter.isOpen">
             <div class="units-container">
+                <!-- Отрисовка юнитов -->
                 <unit-comp
                 class="show-panel__wrapped--unit-item"
                 v-for="unit in props.unitList"
                 :title="unit.id"
                 :key="unit.id"
                 >
-                    {{ unit.content.message }}
+                    {{ unit.message }}
                 </unit-comp>
             </div>
         </div>

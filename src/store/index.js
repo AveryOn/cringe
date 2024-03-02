@@ -5,52 +5,33 @@ import randomID from "../uitls/randomID";
 const useMainStore = defineStore("mainStore", () => {
     // ==========================================    STATE    ===============================================================================>>>>
     // Массив созданных разделов тематики 
-    const chapters = reactive([
-        { title: 'Example', subject: 'Math', color: '#f038ea' },
-        { title: 'Another Example', subject: 'Frontend', color: '#38a0f0' },
-    ]);
+    const chapters = reactive([]);
     // Массив доступных предметов (жанров) для создания раздела тематики 
-    const subjects = reactive([
-        { id: randomID(), title: 'Math' },
-        { id: randomID(), title: 'Frontend' },
-        { id: randomID(), title: 'Backend' },
-    ]);
+    const subjects = reactive([]);
 
     // Стек ошибок и исключений (Для отрисовки соответствующих уведомлений)
     const errorStack = ref([]);
 
     const openChapter = reactive({
         isOpen: false,
-        uuid: null,
+        id: null,
         title: null,
         subject: null,
     });
     const isShowCreationManager = ref(false);
 
     // ==========================================    ACTIONS    ===============================================================================>>>>
-    function toOpenChapter(uuid, title, subject) {
+    function toOpenChapter(id, title, subject) {
         openChapter.isOpen = true;
-        openChapter.uuid = uuid;
+        openChapter.id = id;
         openChapter.title = title;
         openChapter.subject = subject;
     }
     function toCloseChapter() {
         openChapter.isOpen = false;
-        openChapter.uuid = null;
+        openChapter.id = null;
         openChapter.title = null;
         openChapter.subject = null;
-    }
-
-    // Создание раздела
-    function createChapter(chapter) {
-        try {
-            console.log('store/createChapter', chapter);
-            chapter.id = randomID();
-            isShowCreationManager.value = false;
-            chapters.push(chapter);
-        } catch (err) {
-            throw Error('store/index:createChapter', err)
-        }
     }
 
     // Show a Creation Manager
@@ -62,10 +43,6 @@ const useMainStore = defineStore("mainStore", () => {
         }
     }
 
-    // Create new subject
-    function createSubject(title) {
-        subjects.push({ id: randomID(), title: title });
-    }
     // Функция добавления и удаления ошибки (Стек Ошибок)
     function addError(error, secondExpires) {
         try {
@@ -80,11 +57,6 @@ const useMainStore = defineStore("mainStore", () => {
             throw Error('store/index:addError', err)
         }
     }
-
-    // Функция получения списка разделов
-    async function getChapters() {
-        console.log(getChapters.name);
-    }
     return {
         // state
         openChapter,
@@ -97,10 +69,7 @@ const useMainStore = defineStore("mainStore", () => {
         toOpenChapter,
         toCloseChapter,
         showCreationManager,
-        createSubject,
         addError,
-        createChapter,
-        getChapters,
     };
 });
 
