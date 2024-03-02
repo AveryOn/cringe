@@ -22,6 +22,7 @@ async function createUnit(title, message, images, videos, audios, subject, chapt
         const { data: { data } } = response;
         return data;
     } catch (err) {
+        console.log(err);
         throw new Error(`api/unitAPI:createUnit => ${err}`);
     }
 }

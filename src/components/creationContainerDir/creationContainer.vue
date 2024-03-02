@@ -31,7 +31,6 @@ async function confirmUnit(unit) {
             store.openChapter.subject,
             store.openChapter.id,
         );
-        console.log(createdUnit);
         units.value.push(createdUnit);
     } catch (err) {
         throw new Error(`components/creationContainerDir/creationContainer.vue: confirmUnit => ${err}`);
@@ -40,10 +39,8 @@ async function confirmUnit(unit) {
 
 // Получение списка юнитов выбранного раздела
 watch(() => store.openChapter.id, async (newValue) => {
-    console.log(newValue);
     try {
         units.value = await getAllUnitsDB(store.openChapter.id);
-        console.log(units.value);
     } catch (err) {
         throw new Error(`components/creationContainerDir/creationContainer.vue: watch: [fetch units] => ${err}`);
     }
