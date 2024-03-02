@@ -47,21 +47,21 @@ chapterRouter.put('/:id/update', async(req, res) => {
         const { title, subjectId, color, subjectValue } = req.body;
         const updatedChapter = await chapterController.updateChapter( id, title, subjectId, color, subjectValue);
         res.status(200).send({ status: 200, data: updatedChapter });
-        Logger.initLog().log(`POST -> host/chapters/${id}/update => status: 200`);
+        Logger.initLog().log(`PUT -> host/chapters/${id}/update => status: 200`);
     } catch (err) {
-        res.status(500).send(`POST -> Ошибка при обновлении Chapter:${id} => ${err?.message}`);
+        res.status(500).send(`PUT -> Ошибка при обновлении Chapter:${id} => ${err?.message}`);
     }
 });
 
-// Удаление существующей тематики по ID
+// Удаление существующего раздела по ID
 chapterRouter.delete('/:id/delete', async(req, res) => {
     const { id } = req.params;
     try {
-        await chapterController.deleteSubject(id);
+        await chapterController.deleteChapter(id);
         res.status(200).send({ status: 200 });
-        Logger.initLog().log(`POST -> host/subjects/${id}/delete => status: 200`);
+        Logger.initLog().log(`DELETE -> host/chapters/${id}/delete => status: 200`);
     } catch (err) {
-        res.status(500).send(`POST -> Ошибка при удалении Subject => ${err?.message}`);
+        res.status(500).send(`DELETE -> Ошибка при удалении Chapter => ${err?.message}`);
     }
 });
 

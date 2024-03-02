@@ -14,6 +14,7 @@ async function convertChapterForClient(chapters) {
                     id: chapter?.id,
                     title: chapter?.title,
                     subject: subject?.value,
+                    subjectId: subject?.id,
                     color: chapter?.color,
                     updatedAt: chapter?.updatedAt,
                     createdAt: chapter?.createdAt,
@@ -25,17 +26,18 @@ async function convertChapterForClient(chapters) {
         await Promise.all(promises);
         return resultChapters;
     } else {
-        // Если полученные данные представлены в виде обьекта, то выполняем один запрос для Subject
+        // Если полученные данные представлены в виде обьекта, то выполняем один запрос для Subject`
         if (typeof chapters === 'object' && chapters !== null) {
             const subject = await Subject.findByPk(chapters?.subjectId);
             // Поднимаем исключение если subject относится к удаленным
-            if(subject === null) {
+            if(!subject) {
                 throw new Error(`Не удалось использовать subject так как он мягко удален или его не существует`);
             }
             return {
                 id: chapters?.id,
                 title: chapters?.title,
                 subject: subject?.value,
+                subjectId: subject?.id,
                 color: chapters?.color,
                 updatedAt: chapters?.updatedAt,
                 createdAt: chapters?.createdAt,
@@ -48,11 +50,11 @@ async function convertChapterForClient(chapters) {
 async function createChapter(title, subjectID, color) {
     const transaction = await Connection.sequelize.transaction();
     try {
-        const newChapter = (await Chapter.create({
+        const newChapter = await Chapter.create({
             title,
             subjectId: subjectID,
             color,
-        }, { transaction })).toJSON();
+        }, { transaction });
         // Конвертирование объекта chapter для отображение его subject.value вместо subjectId 
         const chapter = await convertChapterForClient(newChapter);
         await transaction.commit();
@@ -114,8 +116,8 @@ async function updateChapter(chapterID, title, subjectId, color, subjectValue) {
                 const chapter = await Chapter.findByPk(chapterID, { transaction });
                 const updatedChapter = chapter.set({ title, subjectId: subject?.id, color });
                 await updatedChapter.save({ transaction });
-                const readyChapter = await convertChapterForClient(updatedChapter)
                 await transaction.commit();
+                const readyChapter = await convertChapterForClient(updatedChapter);
                 Logger.initLogBg().success('DATABASE -> controllers/chapterController:updateChapter => Chapter<_id> успешно обновлен в БД!');
                 resolve(readyChapter);
             } else {
@@ -123,11 +125,10 @@ async function updateChapter(chapterID, title, subjectId, color, subjectValue) {
                 const chapter = await Chapter.findByPk(chapterID, { transaction });
                 const updatedChapter = chapter.set({ title, subjectId, color });
                 await updatedChapter.save({ transaction });
-                const readyChapter = await convertChapterForClient(updatedChapter)
                 await transaction.commit();
+                const readyChapter = await convertChapterForClient(updatedChapter);
                 Logger.initLogBg().success('DATABASE -> controllers/chapterController:updateChapter => Chapter<_id> успешно обновлен в БД!');
                 resolve(readyChapter);
-
             }
         } catch (err) {
             await transaction.rollback();
@@ -137,17 +138,17 @@ async function updateChapter(chapterID, title, subjectId, color, subjectValue) {
     });
 }
 
-// Удаление существующей тематики по ID
-async function deleteChapter(subjectID) {
+// Удаление существующего раздела по ID
+async function deleteChapter(chapterID) {
     const transaction = await Connection.sequelize.transaction();
     try {
-        const subject = await Chapter.findByPk(subjectID, { transaction });
-        await subject.destroy({ transaction });
+        const chapter = await Chapter.findByPk(chapterID, { transaction });
+        await chapter.destroy({ transaction });
         await transaction.commit();
-        Logger.initLogBg().success('DATABASE -> controllers/subjectController:deleteSubject => subject<_id> успешно удален из БД!');
+        Logger.initLogBg().success('DATABASE -> controllers/chapterController:deleteChapter => chapter<_id> успешно удален из БД!');
     } catch (err) {
         await transaction.rollback();
-        Logger.initLogBg().err('DATABASE -> controllers/subjectController:deleteSubject  =>', err);
+        Logger.initLogBg().err('DATABASE -> controllers/chapterController:deleteChapter  =>', err);
     }
 }
 
