@@ -12,12 +12,11 @@ import * as directives from 'vuetify/directives';
 import * as icons from '@mdi/font/css/materialdesignicons.css';
 
 
-
 const vuetify = createVuetify({
     components: vuetifyComponents,
     directives,
     icons,
-})
+});
 
 const app = createApp(App);
 const pinia = createPinia();

@@ -1,6 +1,5 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
-import { serverStart } from './backend/server';
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
     app.quit();
@@ -32,7 +31,7 @@ const createWindow = () => {
 
 app.on("ready", () => {
     createWindow();
-    serverStart(); // Запуск сервера Express
+
 });
 
 app.on("window-all-closed", () => {
